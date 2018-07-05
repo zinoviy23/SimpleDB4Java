@@ -62,7 +62,7 @@ public class TableInformation {
         ARRAY_FLOAT,
 
         /**
-         * Array of other_id. It is used with additional table  
+         * Array of other_id. It is used with additional table
          */
         ARRAY_ID,
     }
