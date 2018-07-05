@@ -1,6 +1,5 @@
 package zinoviy23.simpledb4java.dbinfo;
 
-import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -95,19 +94,41 @@ public class DBInformation {
     }
 
     /**
+     * executor for connection
+     */
+    private DBExecutor executor;
+
+    /**
      * Creates sqlite db
-     * @param url db url
+     * @param folderUrl db folder url
      * @param driver sqlite driver
      * @throws ClassNotFoundException nothing driver
      * @throws IllegalAccessException illegal access
      * @throws InstantiationException can't create driver instance
      */
-    public void createDBSQLite(String url, String driver) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public void createDBSQLite(String folderUrl, String driver) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         try {
             DriverManager.registerDriver((Driver) Class.forName(driver).newInstance());
-            final Connection connection = DriverManager.getConnection(url);
+            executor = new DBExecutor(DriverManager.getConnection(folderUrl + "/" + dbName));
+            createDB(info -> {
+                for (String name : tableNames) {
+                    TableInformation information = get(name);
+                    if (information != null)
+                        executor.executeUpdate(information.toString());
+                }
+            });
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            if (executor != null) {
+                try {
+                    executor.close();
+                    //executor = null;
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

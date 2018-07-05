@@ -10,6 +10,14 @@ import java.util.List;
 public class TableInformation {
 
     /**
+     * Gets table name
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Types of columns
      */
     public enum ColumnType {
@@ -68,7 +76,41 @@ public class TableInformation {
             this.name = name;
             this.type = type;
         }
+
+        /**
+         * Converts column info to sql column definition
+         * @return sql column
+         */
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder(name).append(" ");
+            switch (type) {
+                case ID:
+                    sb.append("INTEGER PRIMARY KEY AUTOINCREMENT");
+                    break;
+                case INT:
+                    sb.append("INT");
+                    break;
+                case STRING:
+                    sb.append("VARCHAR(255)");
+                    break;
+                case FLOAT:
+                    sb.append("FLOAT");
+                    break;
+                case OTHER_ID:
+                    sb.append("INTEGER");
+                    break;
+                case ARRAY:
+                    break;
+            }
+            return sb.toString();
+        }
     }
+
+    /**
+     * Table name
+     */
+    private final String name;
 
     /**
      * Columns
@@ -77,16 +119,20 @@ public class TableInformation {
 
     /**
      * Constructor with list parameter
+     * @param name
      * @param columnInfos columns
      */
-    public TableInformation(List<ColumnInfo> columnInfos) {
+    public TableInformation(String name, List<ColumnInfo> columnInfos) {
+        this.name = name;
         this.columnInfos = columnInfos;
     }
 
     /**
      * Constructor, which creates empty table
+     * @param name
      */
-    public TableInformation() {
+    public TableInformation(String name) {
+        this.name = name;
     }
 
     /**
@@ -112,5 +158,25 @@ public class TableInformation {
      */
     public int size() {
         return columnInfos.size();
+    }
+
+    /**
+     * Gets string representation like sql query
+     * @return sql query
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("CREATE TABLE ").append(name).append(" (");
+
+        for (ColumnInfo ci: columnInfos) {
+            sb.append(ci);
+            sb.append(", ");
+        }
+        if (columnInfos.size() > 0)
+            sb.delete(sb.length() - 2, sb.length());
+
+        sb.append(")");
+
+        return sb.toString();
     }
 }
