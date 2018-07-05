@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cecdd0ff-6b22-4648-bf29-1196697cdd54" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBArrayTableInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBArrayTableInfoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/tmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/examples/tmp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBInformation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/TableInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/TableInformation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBInformationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBInformationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/TableInformationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/TableInformationTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -18,22 +20,16 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/simpledb4java$All_in_SimpleDB4Java__1_.ic" NAME="All in SimpleDB4Java (1) Coverage Results" MODIFIED="1530821332656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DBCreator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBCreator.java">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBExecutor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBExecutor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="54" column="7" selection-start-line="54" selection-start-column="7" selection-end-line="54" selection-end-column="7" />
+            <state relative-caret-position="346">
+              <caret line="23" column="12" lean-forward="true" selection-start-line="23" selection-start-column="12" selection-end-line="28" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -44,12 +40,22 @@
       <file leaf-file-name="SimpleDBGrammarListenerImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+            <state relative-caret-position="188">
+              <caret line="24" column="67" selection-start-line="24" selection-start-column="67" selection-end-line="24" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#395#396#0" expanded="true" />
-                <element signature="e#431#432#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SimpleDBGrammarListenerImplTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -58,62 +64,24 @@
       <file leaf-file-name="DBInformation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBInformation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="76" column="32" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
+            <state relative-caret-position="335">
+              <caret line="79" column="36" selection-start-line="79" selection-start-column="36" selection-end-line="79" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1664#1665#0" expanded="true" />
                 <element signature="e#1724#1725#0" expanded="true" />
+                <element signature="e#1836#1837#0" expanded="true" />
+                <element signature="e#1883#1884#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DBArrayTableInfo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBArrayTableInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="63" column="73" selection-start-line="63" selection-start-column="73" selection-end-line="63" selection-end-column="73" />
-              <folding>
-                <element signature="e#719#720#0" expanded="true" />
-                <element signature="e#751#752#0" expanded="true" />
-                <element signature="e#853#854#0" expanded="true" />
-                <element signature="e#886#887#0" expanded="true" />
-                <element signature="e#1114#1115#0" expanded="true" />
-                <element signature="e#1146#1147#0" expanded="true" />
-                <element signature="e#1263#1264#0" expanded="true" />
-                <element signature="e#1320#1321#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBArrayTableInfoTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBArrayTableInfoTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResultHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/ResultHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBInformationTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DBInformationTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBInformationTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="132" column="30" lean-forward="true" selection-start-line="132" selection-start-column="30" selection-end-line="132" selection-end-column="30" />
+            <state relative-caret-position="1929">
+              <caret line="132" column="25" lean-forward="true" selection-start-line="132" selection-start-column="25" selection-end-line="132" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -124,20 +92,24 @@
       <file leaf-file-name="TableInformation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/TableInformation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="97" column="26" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
+            <state relative-caret-position="512">
+              <caret line="102" column="30" selection-start-line="102" selection-start-column="30" selection-end-line="102" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1803#1804#0" expanded="true" />
+                <element signature="e#1838#1839#0" expanded="true" />
+                <element signature="e#1877#1878#0" expanded="true" />
+                <element signature="e#1912#1913#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tmp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/tmp.java">
+      <file leaf-file-name="TableInformationTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/TableInformationTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="30" column="29" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+            <state relative-caret-position="188">
+              <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -160,19 +132,20 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/examples/tmp.java" />
         <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarVisitorImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/antlr/SimpleDBGrammar.g4" />
         <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBCreator.java" />
-        <option value="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/TableInformationTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBExecutor.java" />
         <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/ResultHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/TableInformation.java" />
         <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBArrayTableInfo.java" />
         <option value="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBArrayTableInfoTest.java" />
+        <option value="$PROJECT_DIR$/examples/tmp.java" />
+        <option value="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/TableInformationTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBInformation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/TableInformation.java" />
+        <option value="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImplTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBInformationTest.java" />
       </list>
     </option>
@@ -246,6 +219,13 @@
               <item name="SimpleDB4Java" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="antlr" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="simpledb4java" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SimpleDB4Java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -293,7 +273,25 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simpledb4java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="simpledb4java" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SimpleDB4Java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simpledb4java" type="462c0819:PsiDirectoryNode" />
               <item name="dbinfo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="simpledb4java" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SimpleDB4Java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="simpledb4java" type="462c0819:PsiDirectoryNode" />
+              <item name="parsing" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -319,6 +317,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="zinoviy23.simpledb4java.parsing" />
       <recent name="zinoviy23.simpledb4java.dbinfo" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -337,47 +336,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.DBInformationTest.dbArrayCreatingTest">
+  <component name="RunManager" selected="JUnit.All in SimpleDB4Java (1)">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.Main" />
+      <module name="SimpleDB4Java" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="zinoviy23.simpledb4java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
-    <configuration name="DBArrayTableInfoTest.toStringTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in SimpleDB4Java (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SimpleDB4Java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="zinoviy23.simpledb4java.dbinfo.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="zinoviy23.simpledb4java.dbinfo" />
-      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.dbinfo.DBArrayTableInfoTest" />
-      <option name="METHOD_NAME" value="toStringTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="DBInformationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SimpleDB4Java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="zinoviy23.simpledb4java.dbinfo.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="zinoviy23.simpledb4java.dbinfo" />
-      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.dbinfo.DBInformationTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="package" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -387,19 +368,36 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="DBInformationTest.dbArrayCreatingTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in SimpleDB4Java (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SimpleDB4Java" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="SimpleDBGrammarListenerImplTest.dbInitializationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SimpleDB4Java" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="zinoviy23.simpledb4java.dbinfo.*" />
+          <option name="PATTERN" value="zinoviy23.simpledb4java.parsing.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="zinoviy23.simpledb4java.dbinfo" />
-      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.dbinfo.DBInformationTest" />
-      <option name="METHOD_NAME" value="dbArrayCreatingTest" />
+      <option name="PACKAGE_NAME" value="zinoviy23.simpledb4java.parsing" />
+      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.parsing.SimpleDBGrammarListenerImplTest" />
+      <option name="METHOD_NAME" value="dbInitializationTest" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -410,7 +408,7 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="DBInformationTest.sqlitedbCreatingFileExistingTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TableInformationTest.fromStringTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SimpleDB4Java" />
       <extension name="coverage">
         <pattern>
@@ -421,31 +419,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="zinoviy23.simpledb4java.dbinfo" />
-      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.dbinfo.DBInformationTest" />
-      <option name="METHOD_NAME" value="sqlitedbCreatingFileExistingTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="DBInformationTest.sqlitedbCreatingTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SimpleDB4Java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="zinoviy23.simpledb4java.dbinfo.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="zinoviy23.simpledb4java.dbinfo" />
-      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.dbinfo.DBInformationTest" />
-      <option name="METHOD_NAME" value="sqlitedbCreatingTest" />
+      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.dbinfo.TableInformationTest" />
+      <option name="METHOD_NAME" value="fromStringTest" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -495,19 +470,19 @@
       <listeners />
     </configuration>
     <list>
-      <item itemvalue="JUnit.DBInformationTest" />
-      <item itemvalue="JUnit.DBInformationTest.sqlitedbCreatingFileExistingTest" />
-      <item itemvalue="JUnit.DBInformationTest.sqlitedbCreatingTest" />
-      <item itemvalue="JUnit.DBArrayTableInfoTest.toStringTest" />
-      <item itemvalue="JUnit.DBInformationTest.dbArrayCreatingTest" />
+      <item itemvalue="JUnit.All in SimpleDB4Java (1)" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.TableInformationTest.fromStringTest" />
+      <item itemvalue="JUnit.SimpleDBGrammarListenerImplTest.dbInitializationTest" />
+      <item itemvalue="JUnit.All in SimpleDB4Java (2)" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.DBInformationTest.dbArrayCreatingTest" />
-        <item itemvalue="JUnit.DBArrayTableInfoTest.toStringTest" />
-        <item itemvalue="JUnit.DBInformationTest.sqlitedbCreatingTest" />
-        <item itemvalue="JUnit.DBInformationTest" />
-        <item itemvalue="JUnit.DBInformationTest.sqlitedbCreatingFileExistingTest" />
+        <item itemvalue="JUnit.All in SimpleDB4Java (1)" />
+        <item itemvalue="JUnit.All in SimpleDB4Java (2)" />
+        <item itemvalue="JUnit.SimpleDBGrammarListenerImplTest.dbInitializationTest" />
+        <item itemvalue="JUnit.TableInformationTest.fromStringTest" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -524,71 +499,71 @@
       <workItem from="1530733155689" duration="6119000" />
       <workItem from="1530740230467" duration="165000" />
       <workItem from="1530782398451" duration="20653000" />
-      <workItem from="1530812188686" duration="3719000" />
+      <workItem from="1530812188686" duration="7532000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DBInformationTest_sqlitedbCreatingFileExistingTest - 2018.07.05 at 17h 50m 55s.xml">
-      <configuration name="DBInformationTest.sqlitedbCreatingFileExistingTest" configurationId="JUnit" />
+    <history-entry file="All_in_SimpleDB4Java - 2018.07.05 at 21h 55m 02s.xml">
+      <configuration name="All in SimpleDB4Java" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DBInformationTest_sqlitedbCreatingFileExistingTest - 2018.07.05 at 17h 51m 11s.xml">
-      <configuration name="DBInformationTest.sqlitedbCreatingFileExistingTest" configurationId="JUnit" />
+    <history-entry file="All_in_SimpleDB4Java_(1) - 2018.07.05 at 21h 55m 34s.xml">
+      <configuration name="All in SimpleDB4Java (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DBInformationTest_sqlitedbCreatingFileExistingTest - 2018.07.05 at 17h 51m 22s.xml">
-      <configuration name="DBInformationTest.sqlitedbCreatingFileExistingTest" configurationId="JUnit" />
+    <history-entry file="TableInformationTest_fromStringTest - 2018.07.05 at 22h 15m 36s.xml">
+      <configuration name="TableInformationTest.fromStringTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DBInformationTest_sqlitedbCreatingFileExistingTest - 2018.07.05 at 17h 52m 15s.xml">
-      <configuration name="DBInformationTest.sqlitedbCreatingFileExistingTest" configurationId="JUnit" />
+    <history-entry file="SimpleDBGrammarListenerImplTest_dbInitializationTest - 2018.07.05 at 23h 03m 10s.xml">
+      <configuration name="SimpleDBGrammarListenerImplTest.dbInitializationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DBInformationTest_sqlitedbCreatingFileExistingTest - 2018.07.05 at 17h 53m 25s.xml">
-      <configuration name="DBInformationTest.sqlitedbCreatingFileExistingTest" configurationId="JUnit" />
+    <history-entry file="SimpleDBGrammarListenerImplTest_dbInitializationTest - 2018.07.05 at 23h 03m 48s.xml">
+      <configuration name="SimpleDBGrammarListenerImplTest.dbInitializationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DBInformationTest - 2018.07.05 at 17h 53m 32s.xml">
-      <configuration name="DBInformationTest" configurationId="JUnit" />
+    <history-entry file="SimpleDBGrammarListenerImplTest_dbInitializationTest - 2018.07.05 at 23h 05m 03s.xml">
+      <configuration name="SimpleDBGrammarListenerImplTest.dbInitializationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DBInformationTest_sqlitedbCreatingTest - 2018.07.05 at 17h 56m 04s.xml">
-      <configuration name="DBInformationTest.sqlitedbCreatingTest" configurationId="JUnit" />
+    <history-entry file="All_in_SimpleDB4Java_(2) - 2018.07.05 at 23h 07m 22s.xml">
+      <configuration name="All in SimpleDB4Java (2)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DBInformationTest_sqlitedbCreatingTest - 2018.07.05 at 17h 56m 22s.xml">
-      <configuration name="DBInformationTest.sqlitedbCreatingTest" configurationId="JUnit" />
+    <history-entry file="All_in_SimpleDB4Java_(2) - 2018.07.05 at 23h 08m 03s.xml">
+      <configuration name="All in SimpleDB4Java (2)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DBInformationTest_sqlitedbCreatingTest - 2018.07.05 at 21h 39m 22s.xml">
-      <configuration name="DBInformationTest.sqlitedbCreatingTest" configurationId="JUnit" />
+    <history-entry file="All_in_SimpleDB4Java_(1) - 2018.07.05 at 23h 08m 39s.xml">
+      <configuration name="All in SimpleDB4Java (1)" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DBArrayTableInfoTest_toStringTest - 2018.07.05 at 21h 39m 30s.xml">
-      <configuration name="DBArrayTableInfoTest.toStringTest" configurationId="JUnit" />
+    <history-entry file="All_in_SimpleDB4Java_(1) - 2018.07.05 at 23h 08m 55s.xml">
+      <configuration name="All in SimpleDB4Java (1)" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30656000" />
+    <option name="totallyTimeSpent" value="34469000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1920" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Tool Output" order="13" weight="0.329718" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="8" visible="true" weight="0.06883671" />
+      <window_info anchor="right" id="Maven Projects" order="8" sideWeight="0.49838188" visible="true" weight="0.11686233" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info id="Capture Tool" order="7" />
       <window_info id="Designer" order="2" />
       <window_info anchor="right" id="Database" order="5" />
-      <window_info anchor="bottom" id="ANTLR Preview" order="12" weight="0.81127983" />
+      <window_info anchor="bottom" id="ANTLR Preview" order="12" weight="0.27223426" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.3991323" />
       <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info anchor="bottom" id="Messages" order="0" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.329718" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info id="Image Layers" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.329718" />
+      <window_info anchor="right" id="Coverage" sideWeight="0.50161815" side_tool="true" weight="0.11686233" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2379936" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2379936" />
       <window_info id="Learn" order="6" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="5" side_tool="true" />
@@ -645,8 +620,6 @@
           <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#395#396#0" expanded="true" />
-            <element signature="e#431#432#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -659,6 +632,8 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1664#1665#0" expanded="true" />
             <element signature="e#1724#1725#0" expanded="true" />
+            <element signature="e#1836#1837#0" expanded="true" />
+            <element signature="e#1883#1884#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -689,6 +664,10 @@
           <caret line="64" column="62" selection-start-line="64" selection-start-column="62" selection-end-line="64" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1803#1804#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1877#1878#0" expanded="true" />
+            <element signature="e#1912#1913#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -742,13 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/antlr/zinoviy23/simpledb4java/antlr/SimpleDBGrammarParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1738">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/antlr/zinoviy23/simpledb4java/antlr/SimpleDBGrammarListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -758,37 +730,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SimpleDB4Java.iml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-828">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/TableInformationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/antlr/SimpleDBGrammar.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="28" column="71" selection-start-line="28" selection-start-column="71" selection-end-line="28" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBExecutor.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -807,35 +748,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#395#396#0" expanded="true" />
-            <element signature="e#431#432#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/tmp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="30" column="29" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/TableInformation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="97" column="26" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBArrayTableInfoTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -843,9 +755,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/ResultHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/tmp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/antlr/zinoviy23/simpledb4java/antlr/SimpleDBGrammarParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="209" column="24" selection-start-line="209" selection-start-column="24" selection-end-line="209" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBArrayTableInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
+        <state relative-caret-position="503">
           <caret line="63" column="73" selection-start-line="63" selection-start-column="73" selection-end-line="63" selection-end-column="73" />
           <folding>
             <element signature="e#719#720#0" expanded="true" />
@@ -860,10 +796,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/ResultHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+        <state relative-caret-position="346">
+          <caret line="23" column="12" lean-forward="true" selection-start-line="23" selection-start-column="12" selection-end-line="28" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -872,20 +808,80 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBInformation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="76" column="32" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
+        <state relative-caret-position="335">
+          <caret line="79" column="36" selection-start-line="79" selection-start-column="36" selection-end-line="79" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1664#1665#0" expanded="true" />
             <element signature="e#1724#1725#0" expanded="true" />
+            <element signature="e#1836#1837#0" expanded="true" />
+            <element signature="e#1883#1884#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/antlr/SimpleDBGrammar.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-371">
+          <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/TableInformation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="102" column="30" selection-start-line="102" selection-start-column="30" selection-end-line="102" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1803#1804#0" expanded="true" />
+            <element signature="e#1838#1839#0" expanded="true" />
+            <element signature="e#1877#1878#0" expanded="true" />
+            <element signature="e#1912#1913#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="24" column="67" selection-start-line="24" selection-start-column="67" selection-end-line="24" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/TableInformationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBInformationTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="132" column="30" lean-forward="true" selection-start-line="132" selection-start-column="30" selection-end-line="132" selection-end-column="30" />
+        <state relative-caret-position="1929">
+          <caret line="132" column="25" lean-forward="true" selection-start-line="132" selection-start-column="25" selection-end-line="132" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-108">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

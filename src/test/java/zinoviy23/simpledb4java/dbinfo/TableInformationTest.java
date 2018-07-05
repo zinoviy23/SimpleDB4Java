@@ -25,4 +25,12 @@ public class TableInformationTest {
         assertEquals("CREATE TABLE Users (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(255), AGE INT)",
                 ti.toString());
     }
+
+    @Test
+    public void fromStringTest() {
+        assertEquals(TableInformation.ColumnType.INT, TableInformation.ColumnType.fromString("int"));
+        assertEquals(TableInformation.ColumnType.STRING, TableInformation.ColumnType.fromString("String"));
+        assertEquals(TableInformation.ColumnType.FLOAT, TableInformation.ColumnType.fromString("float"));
+        assertEquals(TableInformation.ColumnType.OTHER_ID, TableInformation.ColumnType.fromString("aaaaaa"));
+    }
 }

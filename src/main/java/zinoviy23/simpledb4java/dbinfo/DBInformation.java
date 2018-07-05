@@ -5,10 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Singleton class for db information. It contains information only about users tables.
@@ -76,6 +73,14 @@ public class DBInformation {
      */
     public boolean addArrayTable(DBArrayTableInfo dbArrayTableInfo) {
         return arrayTableInfos.add(dbArrayTableInfo);
+    }
+
+    /**
+     * Gets all array tables
+     * @return array of array tables
+     */
+    public DBArrayTableInfo[] getArrayTables() {
+        return arrayTableInfos.toArray(new DBArrayTableInfo[] {});
     }
 
     /**

@@ -45,6 +45,24 @@ public class TableInformation {
          * ID of element from other table
          */
         OTHER_ID;
+
+        /**
+         * Gets column type by string
+         * @param string string representation of type
+         * @return column type
+         */
+        public static ColumnType fromString(String string) {
+            switch (string) {
+                case "int":
+                    return INT;
+                case "String":
+                    return STRING;
+                case "float":
+                    return FLOAT;
+                default:
+                    return OTHER_ID;
+            }
+        }
     }
 
     /**
@@ -72,6 +90,21 @@ public class TableInformation {
             this.type = type;
         }
 
+        /**
+         * Gets column name
+         * @return column name
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * Gets column type
+         * @return column type
+         */
+        public ColumnType getType() {
+            return type;
+        }
 
         /**
          * Converts column info to sql column definition

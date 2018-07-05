@@ -3,6 +3,7 @@ database MyDB;
 class Users {
 	int age;
 	String name;
+	Animals[] animals;
 	
 	query User getMaxAgeUser() : User.max(User.age);
 	query int getMinAgeUserId() : User.min(User.age).id;

@@ -125,7 +125,7 @@ public class DBInformationTest {
 
             File file = new File("UsersDB.sqlite");
             assertTrue(file.delete());
-            DBInformation.getInstance();
+            DBInformation.getInstance().clear();
         }
     }
 
@@ -180,7 +180,7 @@ public class DBInformationTest {
 
             File file = new File("UsersDB.sqlite");
             assertTrue(file.delete());
-            DBInformation.getInstance();
+            DBInformation.getInstance().clear();
         }
     }
 }
