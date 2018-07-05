@@ -21,7 +21,7 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
     @Override
     public void enterFieldDef(SimpleDBGrammarParser.FieldDefContext ctx) {
         if (ctx.LSQBR() == null) {
-            currentTable.add(new TableInformation.ColumnInfo(ctx.ID(0).getSymbol().getText(),
+            currentTable.add(new TableInformation.ColumnInfo(ctx.ID(1).getSymbol().getText(),
                     TableInformation.ColumnType.fromString(ctx.ID(0).getSymbol().getText())));
         } else {
             DBInformation.getInstance().addArrayTable(new DBArrayTableInfo(currentTable.getName(),
