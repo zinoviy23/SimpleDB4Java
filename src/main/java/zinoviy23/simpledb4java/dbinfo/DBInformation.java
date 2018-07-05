@@ -30,6 +30,11 @@ public class DBInformation {
     private Map<String, TableInformation> tableInfos = new HashMap<>();
 
     /**
+     * Set of array tables.
+     */
+    private Set<DBArrayTableInfo> arrayTableInfos = new HashSet<>();
+
+    /**
      * Tables names
      */
     private Set<String> tableNames = new HashSet<>();
@@ -49,7 +54,7 @@ public class DBInformation {
      * @param key table name
      * @return table, that has this name
      */
-    public TableInformation get(Object key) {
+    public TableInformation getTable(Object key) {
         return tableInfos.get(key);
     }
 
@@ -59,9 +64,18 @@ public class DBInformation {
      * @param value table
      * @return recently added table
      */
-    public TableInformation put(String key, TableInformation value) {
+    public TableInformation putTable(String key, TableInformation value) {
         tableNames.add(key);
         return tableInfos.put(key, value);
+    }
+
+    /**
+     * Puts array table in db
+     * @param dbArrayTableInfo new table
+     * @return added table
+     */
+    public boolean addArrayTable(DBArrayTableInfo dbArrayTableInfo) {
+        return arrayTableInfos.add(dbArrayTableInfo);
     }
 
     /**
@@ -123,9 +137,12 @@ public class DBInformation {
             executor = new DBExecutor(DriverManager.getConnection(folderUrl + "/" + dbName));
             createDB(info -> {
                 for (String name : tableNames) {
-                    TableInformation information = get(name);
+                    TableInformation information = getTable(name);
                     if (information != null)
                         executor.executeUpdate(information.toString());
+                }
+                for (DBArrayTableInfo arrayTable : arrayTableInfos) {
+                    executor.executeUpdate(arrayTable.toString());
                 }
             });
         } catch (SQLException e) {
@@ -158,5 +175,6 @@ public class DBInformation {
         dbName = null;
         tableNames.clear();
         tableInfos.clear();
+        arrayTableInfos.clear();
     }
 }

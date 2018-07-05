@@ -44,27 +44,7 @@ public class TableInformation {
         /**
          * ID of element from other table
          */
-        OTHER_ID,
-
-        /**
-         * Array of ints. It is used with additional table
-         */
-        ARRAY_INT,
-
-        /**
-         * Array of strings. It is used with additional table
-         */
-        ARRAY_STRING,
-
-        /**
-         * Array of floats. It is used with additional table
-         */
-        ARRAY_FLOAT,
-
-        /**
-         * Array of other_id. It is used with additional table
-         */
-        ARRAY_ID,
+        OTHER_ID;
     }
 
     /**
@@ -81,6 +61,7 @@ public class TableInformation {
          */
         private final ColumnType type;
 
+
         /**
          * Constructor for column info
          * @param name column name
@@ -90,6 +71,7 @@ public class TableInformation {
             this.name = name;
             this.type = type;
         }
+
 
         /**
          * Converts column info to sql column definition
@@ -114,18 +96,6 @@ public class TableInformation {
                 case OTHER_ID:
                     sb.append("INTEGER");
                     break;
-                case ARRAY_INT:
-                    //TODO: create table
-                    break;
-                case ARRAY_STRING:
-                    //TODO: create table
-                    break;
-                case ARRAY_FLOAT:
-                    //TODO: create table
-                    break;
-                case ARRAY_ID:
-                    //TODO: create table
-                    break;
             }
             return sb.toString();
         }
@@ -143,7 +113,7 @@ public class TableInformation {
 
     /**
      * Constructor with list parameter
-     * @param name
+     * @param name table name
      * @param columnInfos columns
      */
     public TableInformation(String name, List<ColumnInfo> columnInfos) {
@@ -153,7 +123,7 @@ public class TableInformation {
 
     /**
      * Constructor, which creates empty table
-     * @param name
+     * @param name table name
      */
     public TableInformation(String name) {
         this.name = name;
