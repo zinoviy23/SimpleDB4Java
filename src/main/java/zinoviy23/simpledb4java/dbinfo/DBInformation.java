@@ -1,5 +1,7 @@
 package zinoviy23.simpledb4java.dbinfo;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -97,6 +99,15 @@ public class DBInformation {
      * executor for connection
      */
     private DBExecutor executor;
+
+    /**
+     * Gets executor
+     * @return executor
+     */
+    @Nullable
+    public DBExecutor getExecutor() {
+        return executor;
+    }
 
     /**
      * Creates sqlite db

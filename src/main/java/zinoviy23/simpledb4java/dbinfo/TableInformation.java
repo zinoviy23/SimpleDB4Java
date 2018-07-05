@@ -47,10 +47,24 @@ public class TableInformation {
         OTHER_ID,
 
         /**
-         * Array of elements. It is used with additional table
+         * Array of ints. It is used with additional table
          */
-        //TODO: arrays of types
-        ARRAY
+        ARRAY_INT,
+
+        /**
+         * Array of strings. It is used with additional table
+         */
+        ARRAY_STRING,
+
+        /**
+         * Array of floats. It is used with additional table
+         */
+        ARRAY_FLOAT,
+
+        /**
+         * Array of other_id. It is used with additional table  
+         */
+        ARRAY_ID,
     }
 
     /**
@@ -100,7 +114,17 @@ public class TableInformation {
                 case OTHER_ID:
                     sb.append("INTEGER");
                     break;
-                case ARRAY:
+                case ARRAY_INT:
+                    //TODO: create table
+                    break;
+                case ARRAY_STRING:
+                    //TODO: create table
+                    break;
+                case ARRAY_FLOAT:
+                    //TODO: create table
+                    break;
+                case ARRAY_ID:
+                    //TODO: create table
                     break;
             }
             return sb.toString();
