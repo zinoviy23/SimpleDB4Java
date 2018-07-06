@@ -1,15 +1,15 @@
 database MyDB;
 
-class Users {
+class User {
 	int age;
 	String name;
-	Animals[] animals;
+	Animal[] animals;
 	
 	query User getMaxAgeUser() : User.max(User.age);
 	query int getMinAgeUserId() : User.min(User.age).id;
 }
 
-class Animals {
+class Animal {
 	int age;
 	String name;
 	String type;

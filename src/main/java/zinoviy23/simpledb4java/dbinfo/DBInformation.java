@@ -29,7 +29,7 @@ public class DBInformation {
     /**
      * Set of array tables.
      */
-    private Set<DBArrayTableInfo> arrayTableInfos = new HashSet<>();
+    private List<DBArrayTableInfo> arrayTableInfos = new ArrayList<>();
 
     /**
      * Tables names
@@ -77,10 +77,10 @@ public class DBInformation {
 
     /**
      * Gets all array tables
-     * @return array of array tables
+     * @return unmodifiable list of array tables
      */
-    public DBArrayTableInfo[] getArrayTables() {
-        return arrayTableInfos.toArray(new DBArrayTableInfo[] {});
+    public List<DBArrayTableInfo> getArrayTables() {
+        return Collections.unmodifiableList(arrayTableInfos);
     }
 
     /**
