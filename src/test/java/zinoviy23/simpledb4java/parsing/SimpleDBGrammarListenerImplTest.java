@@ -64,8 +64,8 @@ public class SimpleDBGrammarListenerImplTest {
 
         assertEquals(2 ,arr.size());
         assertEquals("A", arr.get(0).getName());
-        assertEquals(3, arr.get(0).getSimpleFieldWithSimpleTypes().size());
-        assertEquals(1, arr.get(1).getSimpleFieldWithSimpleTypes().size());
+        assertEquals(3, arr.get(0).getGeneratedFields().size());
+        assertEquals(2, arr.get(1).getGeneratedFields().size());
 
         DBInformation.getInstance().clear();
     }

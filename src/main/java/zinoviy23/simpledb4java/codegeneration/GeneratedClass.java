@@ -9,9 +9,9 @@ import java.util.List;
  */
 public class GeneratedClass {
     /**
-     * List of simpleFieldWithSimpleTypes
+     * List of generatedFields
      */
-    private List<SimpleFieldWithSimpleType> simpleFieldWithSimpleTypes = new ArrayList<>();
+    private List<GeneratedField> generatedFields = new ArrayList<>();
 
     /**
      * Class name
@@ -35,20 +35,20 @@ public class GeneratedClass {
     }
 
     /**
-     * Adds simple field to class
-     * @param simpleFieldWithSimpleType simple field
+     * Adds field to class
+     * @param field field
      * @return result of adding field to class
      */
-    public boolean addSimpleField(SimpleFieldWithSimpleType simpleFieldWithSimpleType) {
-        return simpleFieldWithSimpleTypes.add(simpleFieldWithSimpleType);
+    public boolean addField(GeneratedField field) {
+        return generatedFields.add(field);
     }
 
     /**
-     * Gets unmodifiable list of simpleFieldWithSimpleTypes
+     * Gets unmodifiable list of generatedFields
      * @return list of simple fields
      */
-    public List<SimpleFieldWithSimpleType> getSimpleFieldWithSimpleTypes() {
-        return Collections.unmodifiableList(simpleFieldWithSimpleTypes);
+    public List<GeneratedField> getGeneratedFields() {
+        return Collections.unmodifiableList(generatedFields);
     }
 
     /**
@@ -70,8 +70,8 @@ public class GeneratedClass {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("class ").append(name).append(" {\n").append(genereatedIdCode);
-        for (SimpleFieldWithSimpleType simpleFieldWithSimpleType : simpleFieldWithSimpleTypes) {
-            sb.append(simpleFieldWithSimpleType.getGeneratedCode());
+        for (GeneratedField field : generatedFields) {
+            sb.append(field.getGeneratedCode());
         }
         sb.append("}");
         

@@ -15,8 +15,8 @@ public class GeneratedClassTest {
     @Test
     public void toStringTest() {
         GeneratedClass generatedClass = new GeneratedClass("A");
-        generatedClass.addSimpleField(new SimpleFieldWithSimpleType("int", "a"));
-        generatedClass.addSimpleField(new SimpleFieldWithSimpleType("String", "B"));
+        generatedClass.addField(new SimpleFieldWithSimpleType("int", "a"));
+        generatedClass.addField(new SimpleFieldWithSimpleType("String", "B"));
 
         assertEquals(
                 "class A {\n    private long id;\n\n    public long getId() {\n        return id;\n    }\n\n" +
