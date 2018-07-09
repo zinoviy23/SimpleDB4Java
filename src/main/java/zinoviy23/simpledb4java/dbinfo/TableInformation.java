@@ -5,7 +5,6 @@ import java.util.List;
 
 /**
  * Information about table
- * @author zinoviy23@gmail.com
  */
 public class TableInformation {
 

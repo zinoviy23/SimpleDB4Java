@@ -2,7 +2,6 @@ package zinoviy23.simpledb4java.dbinfo;
 
 /**
  * Class for information about arrays fields in classes. It creates additional table.
- * @author zinoviy23@gmail.com
  */
 public class DBArrayTableInfo {
     /**

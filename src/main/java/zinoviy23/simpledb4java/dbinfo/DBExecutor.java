@@ -7,7 +7,6 @@ import java.sql.Statement;
 
 /**
  * Class for execution queries for database
- * @author zinoviy23@gmail.com
  */
 public class DBExecutor {
     /**

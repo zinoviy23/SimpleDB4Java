@@ -4,7 +4,6 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Class for information and code generation for fields. <b>(Without arrays)</b>
- * @author zinoviy23@gmail.com
  */
 public class SimpleField {
     /**
@@ -57,6 +56,12 @@ public class SimpleField {
                 "    public %s get%s() {\n" +
                 "        return %s;\n" +
                 "    }\n" +
-                "\n", type, name, type, Utils.getStringWithCapitalFirstChar(name), name);
+                "\n" +
+                "    public void set%s(%s %s) {\n" +
+                "        this.%s = %s;\n" +
+                "        update();\n" +
+                "    }\n" +
+                "\n", type, name, type, Utils.getStringWithCapitalFirstChar(name), name,
+                Utils.getStringWithCapitalFirstChar(name), type, name, name, name);
     }
 }

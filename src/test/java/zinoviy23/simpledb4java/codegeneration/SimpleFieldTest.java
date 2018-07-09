@@ -17,9 +17,11 @@ public class SimpleFieldTest {
         SimpleField simpleField = new SimpleField("int", "a");
         SimpleField simpleField1 = new SimpleField("String", "B");
 
-        assertEquals("    private int a;\n\n    public int getA() {\n        return a;\n    }\n\n",
+        assertEquals("    private int a;\n\n    public int getA() {\n        return a;\n    }\n\n" +
+                        "    public void setA(int a) {\n        this.a = a;\n        update();\n    }\n\n",
                 simpleField.toString());
-        assertEquals("    private String B;\n\n    public String getB() {\n        return B;\n    }\n\n",
+        assertEquals("    private String B;\n\n    public String getB() {\n        return B;\n    }\n\n" +
+                        "    public void setB(String B) {\n        this.B = B;\n        update();\n    }\n\n",
                 simpleField1.toString());
     }
 }

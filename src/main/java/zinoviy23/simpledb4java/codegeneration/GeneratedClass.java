@@ -6,7 +6,6 @@ import java.util.List;
 
 /**
  * Class for generated class.
- * @author zinoviy23@gmail.com
  */
 public class GeneratedClass {
     /**
@@ -53,12 +52,24 @@ public class GeneratedClass {
     }
 
     /**
+     * Generated code for id
+     */
+    private static final String genereatedIdCode =
+                "    private long id;\n" +
+                "\n" +
+                "    public long getId() {\n" +
+                "        return id;\n" +
+                "    }\n" +
+                "\n";
+
+
+    /**
      * Creates class source code.
      * @return string representation of class source code.
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("class ").append(name).append(" {\n");
+        StringBuilder sb = new StringBuilder("class ").append(name).append(" {\n").append(genereatedIdCode);
         for (SimpleField simpleField : simpleFields) {
             sb.append(simpleField);
         }

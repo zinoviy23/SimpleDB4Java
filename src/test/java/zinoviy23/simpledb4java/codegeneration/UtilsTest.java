@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 
 /**
  * Class for testing Util class
- * @author zinoviy23@gmail.com
  */
 public class UtilsTest {
 

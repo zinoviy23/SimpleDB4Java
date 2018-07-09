@@ -4,7 +4,6 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Class with utils for working with code generation
- * @author zinoviy23@gmail.com
  */
 public class Utils {
 

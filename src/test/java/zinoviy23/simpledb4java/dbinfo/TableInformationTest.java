@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
 
 /**
  * Class for testing TableInformation
- * @author zinoviy23@gmail.com
  */
 public class TableInformationTest {
 

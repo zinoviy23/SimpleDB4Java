@@ -17,7 +17,6 @@ import static org.junit.Assert.*;
 
 /**
  * Class for testing parsing in SimpleDBGrammarListenerImpl class
- * @author zinoviy23@gmail.com
  */
 public class SimpleDBGrammarListenerImplTest {
 

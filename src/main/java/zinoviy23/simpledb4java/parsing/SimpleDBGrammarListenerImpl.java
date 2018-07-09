@@ -15,7 +15,6 @@ import java.util.List;
 
 /**
  * Class for tree recognizing
- * @author zinoviy23@gmal.com
  */
 public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
     private TableInformation currentTable;

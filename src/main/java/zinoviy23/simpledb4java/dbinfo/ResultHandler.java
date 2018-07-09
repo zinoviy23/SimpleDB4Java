@@ -6,7 +6,6 @@ import java.sql.SQLException;
 /**
  * Handler for getting information from ResultSet
  * @param <T> type of data
- * @author zinoviy23@gmail.com
  */
 @FunctionalInterface
 public interface ResultHandler<T> {

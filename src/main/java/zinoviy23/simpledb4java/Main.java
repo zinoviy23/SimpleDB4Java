@@ -15,7 +15,6 @@ import java.util.LinkedList;
 
 /**
  * Main class of application
- * @author zinoviy23@gmail.com
  */
 public class Main {
     /**
