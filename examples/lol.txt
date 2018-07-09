@@ -1,12 +1,69 @@
-    private long animal;
-
-    public Optional<Animal> getAnimal() {
-        return Animal.getById(animal);
+    public static List<A> all() {
+        return DBService.getInstance().getExecutor().executeQuery("select id from A",
+            set -> {
+                List<A> list = new ArrayList<>();
+                    while (set.next()) {
+                        A.getById(set.getLong(1)).ifPresent(list::add);
+                    }
+                    return list;
+            });
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal.getId();
-        update();
+
+    public static Optional<A> getById(long id) {
+        A obj = DBService.getInstance().getExecutor().executeQuery(
+            String.format("select a, B from A where id=%d", id),
+            set -> !set.isClosed() ? new A(set.getInt(1), set.getString(2)) : null);
+        if (obj == null)
+            return Optional.empty();
+        obj.id = id;
+        return Optional.of(obj);
+    }
+
+    public static Optional<A> min(Comparator<A> comparator) {
+        return all().stream().min(comparator);
+    }
+
+    public static Optional<A> max(Comparator<A> comparator) {
+        return all().stream().max(comparator);
+    }
+
+    public static Optional<A> find(String sql) {
+        return DBService.getInstance().getExecutor().executeQuery(
+            String.format("select id from A where %s", sql),
+            set -> !set.isClosed() ? %s.getById(set.getLong(1)) : Optional.empty());
+    }
+
+    public static List<A> findAll(String sql) {
+        return DBService.getInstance().getExecutor().executeQuery(
+            String.format("select id from A where %s", sql),
+            set -> {
+                List<A> list = new ArrayList<>();
+                while (set.next()) {
+                    A.getById(set.getLong(1)).ifPresent(list::add);
+                }
+                return list;
+             });
+    }
+
+    private A(int a, String B) {
+        this.a = a;
+        this.B = B;
+    }
+
+    public static A create(int a, String B) {
+        A obj = new A(a, B);
+        DBService.getInstance().getExecutor().executeUpdate(
+            String.format("insert into A (a, B) values ('%s', '%s')", a, B));
+        obj.id = DBService.getInstance().getExecutor().executeQuery("select last_insert_rowid()",
+                set -> set.getLong(1));
+        return obj;
+    }
+
+    private void update() {
+        DBService.getInstance().getExecutor().executeUpdate(
+            String.format("update A set a='%s', B='%s' where id=%d"
+                , a, B, id));
     }
 
 

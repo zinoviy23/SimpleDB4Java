@@ -59,8 +59,10 @@ public class Utils {
                 return "Long";
             case "float":
                 return "Float";
+            case "String":
+                return "String";
             default:
-                return typeName;
+                return "Long";
         }
     }
 

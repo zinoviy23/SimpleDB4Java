@@ -18,6 +18,8 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
 
     private LinkedList<GeneratedClass> generatedClasses;
 
+    private static final String PACKAGE_NAME = "db";
+
     private final static Set<String> simpleTypes = new HashSet<>(Arrays.asList("int", "long", "String", "float"));
 
     public SimpleDBGrammarListenerImpl(@NotNull LinkedList<GeneratedClass> generatedClasses) {
@@ -65,7 +67,7 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
     @Override
     public void enterClassDef(SimpleDBGrammarParser.ClassDefContext ctx) {
         currentTable = new TableInformation(ctx.ID().getSymbol().getText());
-        generatedClasses.add(new GeneratedClass(ctx.ID().getSymbol().getText()));
+        generatedClasses.add(new GeneratedClass(ctx.ID().getSymbol().getText(), PACKAGE_NAME));
     }
 
     @Override
