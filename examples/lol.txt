@@ -1,24 +1,12 @@
-    public List<Integer> getInts() {
-        return DBService().getInstance().getExecutor().executeQuery(
-            String.format("select second from User_int_ints where first=%%d", id),
-            set -> {
-                List<Integer> list = new ArrayList<>();
-                while (set.next()) {
-                    list.add(set.getInt(1));
-                }
-                return list;
-            });
+    private long animal;
+
+    public Optional<Animal> getAnimal() {
+        return Animal.getById(animal);
     }
 
-    public void addInts(int ints) {
-        DBService().getInstance().getExecutor().executeUpdate(
-            String.format("insert into User_int_ints (first, second) values(%d, '%s')", id, ints)
-        );
+    public void setAnimal(Animal animal) {
+        this.animal = animal.getId();
+        update();
     }
 
-    public void removeInts(int ints) {
-        DBService().getInstance().getExecutor().executeUpdate(
-            String.format("delete from User_int_ints where first=%d and second='%s'", id, ints)
-        );
-    }
 
