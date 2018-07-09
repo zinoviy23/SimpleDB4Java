@@ -1,0 +1,5 @@
+    public addField(Animal field) {
+        DBService().getInstance().getExecutor().executeUpdate(
+            String.format("insert into User_Animal_field (first, second) values (%d, %d)", id, field.getId())
+        );
+    }

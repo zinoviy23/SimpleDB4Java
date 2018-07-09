@@ -2,25 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cecdd0ff-6b22-4648-bf29-1196697cdd54" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/examples/result.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/ArrayField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/lol.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/ArrayFieldWithComplexType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/ArrayFieldWithComplexTypeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/GeneratedClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/GeneratedClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/SimpleField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/SimpleField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBArrayTableInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBArrayTableInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/DBExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/ResultHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/ResultHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/TableInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/TableInformation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/GeneratedClassTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/GeneratedClassTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/SimpleFieldTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/SimpleFieldTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/UtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/UtilsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBArrayTableInfoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBArrayTableInfoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBInformationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBInformationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/TableInformationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/TableInformationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/ArrayField.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -36,18 +22,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="GeneratedClassTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/GeneratedClassTest.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -102,35 +76,39 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SimpleDBGrammarListenerImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImpl.java">
+      <file leaf-file-name="ArrayFieldWithComplexType.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/ArrayFieldWithComplexType.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="29" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+            <state relative-caret-position="464">
+              <caret line="89" column="94" lean-forward="true" selection-start-line="89" selection-start-column="94" selection-end-line="89" selection-end-column="94" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#815#816#0" expanded="true" />
+                <element signature="e#842#843#0" expanded="true" />
+                <element signature="e#939#940#0" expanded="true" />
+                <element signature="e#966#967#0" expanded="true" />
+                <element signature="e#1092#1093#0" expanded="true" />
+                <element signature="e#1124#1125#0" expanded="true" />
+                <element signature="e#2368#2369#0" expanded="true" />
+                <element signature="e#2389#2390#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SimpleDBGrammarListenerImplTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImplTest.java">
+      <file leaf-file-name="ArrayFieldWithComplexTypeTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/ArrayFieldWithComplexTypeTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="18" column="65" selection-start-line="18" selection-start-column="65" selection-end-line="18" selection-end-column="65" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="430">
+              <caret line="32" column="26" lean-forward="true" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TableInformation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/dbinfo/TableInformation.java">
+      <file leaf-file-name="lol.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/lol.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+            <state>
+              <caret selection-end-line="4" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -141,8 +119,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="JUnit4 Test Class" />
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
@@ -164,7 +142,6 @@
         <option value="$PROJECT_DIR$/examples/result.java" />
         <option value="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/SimpleFieldTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/GeneratedClassTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/ArrayField.java" />
         <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/GeneratedClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/SimpleField.java" />
         <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/Utils.java" />
@@ -179,6 +156,11 @@
         <option value="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/DBInformationTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/dbinfo/TableInformationTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImplTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/ArrayFieldTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/ArrayField.java" />
+        <option value="$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/ArrayFieldWithComplexType.java" />
+        <option value="$PROJECT_DIR$/examples/lol.txt" />
+        <option value="$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/ArrayFieldWithComplexTypeTest.java" />
       </list>
     </option>
   </component>
@@ -380,18 +362,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.GeneratedClassTest.toStringTest">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.Main" />
-      <module name="SimpleDB4Java" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="zinoviy23.simpledb4java.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-    </configuration>
+  <component name="RunManager" selected="JUnit.All in SimpleDB4Java">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
@@ -412,7 +383,7 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="GeneratedClassTest.toStringTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ArrayFieldWithComplexTypeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SimpleDB4Java" />
       <extension name="coverage">
         <pattern>
@@ -423,9 +394,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="zinoviy23.simpledb4java.codegeneration" />
-      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.codegeneration.GeneratedClassTest" />
-      <option name="METHOD_NAME" value="toStringTest" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.codegeneration.ArrayFieldWithComplexTypeTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -435,30 +406,7 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="SimpleDBGrammarListenerImplTest.dbInitializationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SimpleDB4Java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="zinoviy23.simpledb4java.parsing.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="zinoviy23.simpledb4java.parsing" />
-      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.parsing.SimpleDBGrammarListenerImplTest" />
-      <option name="METHOD_NAME" value="dbInitializationTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="SimpleFieldTest.toStringTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ArrayFieldWithComplexTypeTest.getAddMethod" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SimpleDB4Java" />
       <extension name="coverage">
         <pattern>
@@ -469,8 +417,54 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="zinoviy23.simpledb4java.codegeneration" />
-      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.codegeneration.SimpleFieldTest" />
-      <option name="METHOD_NAME" value="toStringTest" />
+      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.codegeneration.ArrayFieldWithComplexTypeTest" />
+      <option name="METHOD_NAME" value="getAddMethod" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="ArrayFieldWithComplexTypeTest.getArrayMethodGenTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SimpleDB4Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="zinoviy23.simpledb4java.codegeneration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="zinoviy23.simpledb4java.codegeneration" />
+      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.codegeneration.ArrayFieldWithComplexTypeTest" />
+      <option name="METHOD_NAME" value="getArrayMethodGenTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="ArrayFieldWithComplexTypeTest.getArrayMethodTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SimpleDB4Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="zinoviy23.simpledb4java.codegeneration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="zinoviy23.simpledb4java.codegeneration" />
+      <option name="MAIN_CLASS_NAME" value="zinoviy23.simpledb4java.codegeneration.ArrayFieldWithComplexTypeTest" />
+      <option name="METHOD_NAME" value="getArrayMethodTest" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -520,19 +514,19 @@
       <listeners />
     </configuration>
     <list>
-      <item itemvalue="JUnit.SimpleDBGrammarListenerImplTest.dbInitializationTest" />
+      <item itemvalue="JUnit.ArrayFieldWithComplexTypeTest.getArrayMethodGenTest" />
+      <item itemvalue="JUnit.ArrayFieldWithComplexTypeTest" />
+      <item itemvalue="JUnit.ArrayFieldWithComplexTypeTest.getArrayMethodTest" />
+      <item itemvalue="JUnit.ArrayFieldWithComplexTypeTest.getAddMethod" />
       <item itemvalue="JUnit.All in SimpleDB4Java" />
-      <item itemvalue="Application.Main" />
-      <item itemvalue="JUnit.SimpleFieldTest.toStringTest" />
-      <item itemvalue="JUnit.GeneratedClassTest.toStringTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GeneratedClassTest.toStringTest" />
         <item itemvalue="JUnit.All in SimpleDB4Java" />
-        <item itemvalue="JUnit.SimpleFieldTest.toStringTest" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.SimpleDBGrammarListenerImplTest.dbInitializationTest" />
+        <item itemvalue="JUnit.ArrayFieldWithComplexTypeTest.getAddMethod" />
+        <item itemvalue="JUnit.ArrayFieldWithComplexTypeTest.getArrayMethodTest" />
+        <item itemvalue="JUnit.ArrayFieldWithComplexTypeTest.getArrayMethodGenTest" />
+        <item itemvalue="JUnit.ArrayFieldWithComplexTypeTest" />
       </list>
     </recent_temporary>
   </component>
@@ -554,23 +548,11 @@
       <workItem from="1530876101208" duration="71000" />
       <workItem from="1530876411029" duration="8340000" />
       <workItem from="1531066574409" duration="31000" />
-      <workItem from="1531137255285" duration="1805000" />
+      <workItem from="1531137255285" duration="4739000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SimpleFieldTest_toStringTest - 2018.07.09 at 15h 05m 45s.xml">
-      <configuration name="SimpleFieldTest.toStringTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_SimpleDB4Java - 2018.07.09 at 15h 06m 25s.xml">
-      <configuration name="All in SimpleDB4Java" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GeneratedClassTest_toStringTest - 2018.07.09 at 15h 07m 37s.xml">
-      <configuration name="GeneratedClassTest.toStringTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GeneratedClassTest_toStringTest - 2018.07.09 at 15h 08m 17s.xml">
-      <configuration name="GeneratedClassTest.toStringTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="All_in_SimpleDB4Java - 2018.07.09 at 15h 08m 33s.xml">
       <configuration name="All in SimpleDB4Java" configurationId="JUnit" />
     </history-entry>
@@ -589,9 +571,21 @@
     <history-entry file="GeneratedClassTest_toStringTest - 2018.07.09 at 15h 16m 46s.xml">
       <configuration name="GeneratedClassTest.toStringTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="ArrayFieldTest_getArrayMethodGenTest - 2018.07.09 at 15h 50m 07s.xml">
+      <configuration name="ArrayFieldTest.getArrayMethodGenTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ArrayFieldTest_getArrayMethodGenTest - 2018.07.09 at 15h 50m 33s.xml">
+      <configuration name="ArrayFieldTest.getArrayMethodGenTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ArrayFieldWithComplexTypeTest - 2018.07.09 at 15h 52m 24s.xml">
+      <configuration name="ArrayFieldWithComplexTypeTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ArrayFieldWithComplexTypeTest_getArrayMethodGenTest - 2018.07.09 at 15h 54m 45s.xml">
+      <configuration name="ArrayFieldWithComplexTypeTest.getArrayMethodGenTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47230000" />
+    <option name="totallyTimeSpent" value="50164000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -620,12 +614,12 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.3991323" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.329718" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.329718" />
+      <window_info anchor="bottom" id="Messages" order="0" visible="true" weight="0.329718" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info id="Image Layers" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.329718" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25133404" />
       <window_info id="Learn" order="6" />
@@ -652,20 +646,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/examples/tmp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/parsing/SimpleDBGrammarListenerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -887,21 +867,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/ArrayField.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="44" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="44" />
-          <folding>
-            <element signature="e#460#461#0" expanded="true" />
-            <element signature="e#487#488#0" expanded="true" />
-            <element signature="e#531#532#0" expanded="true" />
-            <element signature="e#558#559#0" expanded="true" />
-            <element signature="e#607#608#0" expanded="true" />
-            <element signature="e#639#640#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/GeneratedClass.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1037,6 +1002,37 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/lol.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="4" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zinoviy23/simpledb4java/codegeneration/ArrayFieldWithComplexType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="89" column="94" lean-forward="true" selection-start-line="89" selection-start-column="94" selection-end-line="89" selection-end-column="94" />
+          <folding>
+            <element signature="e#815#816#0" expanded="true" />
+            <element signature="e#842#843#0" expanded="true" />
+            <element signature="e#939#940#0" expanded="true" />
+            <element signature="e#966#967#0" expanded="true" />
+            <element signature="e#1092#1093#0" expanded="true" />
+            <element signature="e#1124#1125#0" expanded="true" />
+            <element signature="e#2368#2369#0" expanded="true" />
+            <element signature="e#2389#2390#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/zinoviy23/simpledb4java/codegeneration/ArrayFieldWithComplexTypeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="32" column="26" lean-forward="true" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
         </state>
       </provider>
     </entry>
