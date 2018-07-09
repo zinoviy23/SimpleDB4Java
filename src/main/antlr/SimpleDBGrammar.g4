@@ -2,7 +2,7 @@ grammar SimpleDBGrammar;
 
 file : fileHeader (classDef)*; // root node
 fileHeader : DATABASEKW ID CMDEND; // file header
-fieldDef : ID(LSQBR RSQBR)? ID CMDEND; // simpleField definition
+fieldDef : ID(LSQBR RSQBR)? ID CMDEND; // simpleFieldWithSimpleType definition
 classDef : CLASSKW ID LBRACE (fieldDef|queryDef)* RBRACE; // class definition
 dottedId : ID (DOT ID)*; // doted name like System.out.println
 expression : ('-'|'+'|'++'|'--') expression | // expression

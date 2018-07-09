@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import zinoviy23.simpledb4java.antlr.SimpleDBGrammarBaseListener;
 import zinoviy23.simpledb4java.antlr.SimpleDBGrammarParser;
 import zinoviy23.simpledb4java.codegeneration.GeneratedClass;
-import zinoviy23.simpledb4java.codegeneration.SimpleField;
+import zinoviy23.simpledb4java.codegeneration.SimpleFieldWithSimpleType;
 import zinoviy23.simpledb4java.dbinfo.DBArrayTableInfo;
 import zinoviy23.simpledb4java.dbinfo.DBInformation;
 import zinoviy23.simpledb4java.dbinfo.TableInformation;
@@ -39,7 +39,7 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
         if (ctx.LSQBR() == null) {
             currentTable.add(new TableInformation.ColumnInfo(ctx.ID(1).getSymbol().getText(),
                     TableInformation.ColumnType.fromString(ctx.ID(0).getSymbol().getText())));
-            generatedClasses.getLast().addSimpleField(new SimpleField(ctx.ID(0).getSymbol().getText(),
+            generatedClasses.getLast().addSimpleField(new SimpleFieldWithSimpleType(ctx.ID(0).getSymbol().getText(),
                     ctx.ID(1).getSymbol().getText()));
         } else {
             DBInformation.getInstance().addArrayTable(new DBArrayTableInfo(currentTable.getName(),

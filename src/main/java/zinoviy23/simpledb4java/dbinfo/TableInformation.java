@@ -26,9 +26,14 @@ public class TableInformation {
         ID,
 
         /**
-         * Inf field
+         * Int field
          */
         INT,
+
+        /**
+         * Long field
+         */
+        LONG,
 
         /**
          * Char field
@@ -58,6 +63,8 @@ public class TableInformation {
                     return STRING;
                 case "float":
                     return FLOAT;
+                case "long":
+                    return LONG;
                 default:
                     return OTHER_ID;
             }
@@ -118,6 +125,9 @@ public class TableInformation {
                     break;
                 case INT:
                     sb.append("INT");
+                    break;
+                case LONG:
+                    sb.append("INTEGER");
                     break;
                 case STRING:
                     sb.append("VARCHAR(255)");

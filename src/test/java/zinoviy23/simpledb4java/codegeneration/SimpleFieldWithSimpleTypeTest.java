@@ -7,21 +7,21 @@ import static org.junit.Assert.*;
 /**
  * Class for testing field
  */
-public class SimpleFieldTest {
+public class SimpleFieldWithSimpleTypeTest {
 
     /**
      * Test of code generation for field
      */
     @Test
     public void toStringTest() {
-        SimpleField simpleField = new SimpleField("int", "a");
-        SimpleField simpleField1 = new SimpleField("String", "B");
+        SimpleFieldWithSimpleType simpleFieldWithSimpleType = new SimpleFieldWithSimpleType("int", "a");
+        SimpleFieldWithSimpleType simpleFieldWithSimpleType1 = new SimpleFieldWithSimpleType("String", "B");
 
         assertEquals("    private int a;\n\n    public int getA() {\n        return a;\n    }\n\n" +
                         "    public void setA(int a) {\n        this.a = a;\n        update();\n    }\n\n",
-                simpleField.toString());
+                simpleFieldWithSimpleType.getGeneratedCode());
         assertEquals("    private String B;\n\n    public String getB() {\n        return B;\n    }\n\n" +
                         "    public void setB(String B) {\n        this.B = B;\n        update();\n    }\n\n",
-                simpleField1.toString());
+                simpleFieldWithSimpleType1.getGeneratedCode());
     }
 }

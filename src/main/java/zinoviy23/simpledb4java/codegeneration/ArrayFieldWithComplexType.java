@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Class for array fields of generated class
  */
-public class ArrayFieldWithComplexType {
+public class ArrayFieldWithComplexType implements GeneratedField {
     /**
      * Array type
      */
@@ -79,6 +79,10 @@ public class ArrayFieldWithComplexType {
                         type, Utils.getStringWithCapitalFirstChar(name), tableName, type, type);
     }
 
+    /**
+     * Generates code for add method for array
+     * @return code of add method
+     */
     String getAddMethod() {
         return
                 String.format("" +
@@ -91,11 +95,38 @@ public class ArrayFieldWithComplexType {
     }
 
     /**
+     * Generates code for remove method of array
+     * @return code of remove method
+     */
+    String getRemoveMethod() {
+        return
+                String.format("" +
+                        "    public void remove%s(%s %s) {\n" +
+                        "        DBService().getInstance().getExecutor().executeUpdate(\n" +
+                        "            String.format(\"delete from %s where first=%%d and second=%%d\", id, %s.getId())\n" +
+                        "        );\n" +
+                        "    }\n\n", Utils.getStringWithCapitalFirstChar(name), type, name, tableName, name);
+    }
+
+    /**
+     * Simple toString
+     * @return information about fields
+     */
+    @Override
+    public String toString() {
+        return "ArrayFieldWithComplexType{" +
+                "type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                ", tableName='" + tableName + '\'' +
+                '}';
+    }
+
+    /**
      * Creates code for this type of field
      * @return generated code for field
      */
     @Override
-    public String toString() {
-        return getArrayMethod();
+    public String getGeneratedCode() {
+        return getArrayMethod() + getAddMethod() + getRemoveMethod();
     }
 }
