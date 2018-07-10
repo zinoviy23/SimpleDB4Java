@@ -41,6 +41,12 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
             value.forEach((name, type) -> System.out.print(name + " " + type + "; "));
             System.out.println();
         });
+
+        SimpleDBGrammarParser.methodsSymbolTable.forEach((key, value) -> {
+            System.out.print(key + " : ");
+            value.forEach((name, type) -> System.out.print(name + " " + type + "; "));
+            System.out.println();
+        });
     }
 
     @Override

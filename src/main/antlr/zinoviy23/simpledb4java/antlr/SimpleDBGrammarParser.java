@@ -21,7 +21,7 @@ public class SimpleDBGrammarParser extends Parser {
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, CMDEND=16, 
 		DATABASEKW=17, CLASSKW=18, RETURNKW=19, FORKW=20, IFKW=21, ELSEKW=22, 
 		LBRACE=23, RBRACE=24, LPAR=25, RPAR=26, LSQBR=27, RSQBR=28, DOT=29, COMMA=30, 
-		DOUBLEDOT=31, CONSTANT=32, ID=33, SKIP_=34;
+		DOUBLEDOT=31, LEFTARROW=32, CONSTANT=33, ID=34, SKIP_=35;
 	public static final int
 		RULE_file = 0, RULE_fileHeader = 1, RULE_typeId = 2, RULE_fieldDef = 3, 
 		RULE_classDef = 4, RULE_dottedId = 5, RULE_expression = 6, RULE_arrIndexList = 7, 
@@ -38,13 +38,13 @@ public class SimpleDBGrammarParser extends Parser {
 		null, "'-'", "'+'", "'++'", "'--'", "'*'", "'/'", "'<'", "'>'", "'<='", 
 		"'>='", "'=='", "'!='", "'='", "'+='", "'-='", "';'", "'database'", "'class'", 
 		"'return'", "'for'", "'if'", "'else'", "'{'", "'}'", "'('", "')'", "'['", 
-		"']'", "'.'", "','", "':'"
+		"']'", "'.'", "','", "':'", "'->'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, "CMDEND", "DATABASEKW", "CLASSKW", "RETURNKW", 
 		"FORKW", "IFKW", "ELSEKW", "LBRACE", "RBRACE", "LPAR", "RPAR", "LSQBR", 
-		"RSQBR", "DOT", "COMMA", "DOUBLEDOT", "CONSTANT", "ID", "SKIP_"
+		"RSQBR", "DOT", "COMMA", "DOUBLEDOT", "LEFTARROW", "CONSTANT", "ID", "SKIP_"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -98,8 +98,28 @@ public class SimpleDBGrammarParser extends Parser {
 	// table for fields
 	public static final java.util.Map<String, java.util.Map<String, String>> fieldsSymbolTable = new java.util.HashMap<>();
 
+	// class for methods
+	public static class MethodInfo {
+	    public final String type;
+
+	    public final String name;
+
+	    public final java.util.LinkedHashMap<String, String> arguments;
+
+	    public MethodInfo(String type, String name, java.util.LinkedHashMap<String, String> arguments) {
+	        this.name = name;
+	        this.type = type;
+	        this.arguments = arguments;
+	    }
+
+	    @Override
+	    public String toString() {
+	        return "{type=" + type + ", name=" + name + ", arguments=" + arguments +"}";
+	    }
+	}
+
 	// table for methods
-	public static final java.util.Map<String, java.util.Map<String, String>> methodsSymbolTable = new java.util.HashMap<>();
+	public static final java.util.Map<String, java.util.Map<String, MethodInfo>> methodsSymbolTable = new java.util.HashMap<>();
 
 	public SimpleDBGrammarParser(TokenStream input) {
 		super(input);
@@ -1095,6 +1115,8 @@ public class SimpleDBGrammarParser extends Parser {
 
 	public static class QueryDefContext extends ParserRuleContext {
 		public String className;
+		public TypeIdContext typeId;
+		public Token ID;
 		public FuncArgListContext funcArgList;
 		public TypeIdContext typeId() {
 			return getRuleContext(TypeIdContext.class,0);
@@ -1105,7 +1127,7 @@ public class SimpleDBGrammarParser extends Parser {
 			return getRuleContext(FuncArgListContext.class,0);
 		}
 		public TerminalNode RPAR() { return getToken(SimpleDBGrammarParser.RPAR, 0); }
-		public TerminalNode DOUBLEDOT() { return getToken(SimpleDBGrammarParser.DOUBLEDOT, 0); }
+		public TerminalNode LEFTARROW() { return getToken(SimpleDBGrammarParser.LEFTARROW, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
@@ -1147,9 +1169,9 @@ public class SimpleDBGrammarParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(169);
-			typeId();
+			((QueryDefContext)_localctx).typeId = typeId();
 			setState(170);
-			match(ID);
+			((QueryDefContext)_localctx).ID = match(ID);
 			setState(171);
 			match(LPAR);
 			setState(172);
@@ -1159,17 +1181,32 @@ public class SimpleDBGrammarParser extends Parser {
 			setState(187);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case DOUBLEDOT:
+			case LEFTARROW:
 				{
 				setState(174);
-				match(DOUBLEDOT);
+				match(LEFTARROW);
 				setState(175);
 				expression(0);
 				setState(176);
 				match(CMDEND);
 
-				for (int i = 0; i < ((QueryDefContext)_localctx).funcArgList.ID().size(); i++)
-				    System.out.println(((QueryDefContext)_localctx).funcArgList.ID(i).getText());
+				java.util.LinkedHashMap<String, String> arguments = new java.util.LinkedHashMap<>();
+				for (int i = 0; i < ((QueryDefContext)_localctx).funcArgList.ID().size(); i++) {
+				    if (arguments.containsKey(((QueryDefContext)_localctx).funcArgList.ID(i).getText()))
+				        throw new RuntimeException(String.format("Two arguments with same inditificators (%s) in class %s in method %s. Line %d",
+				                ((QueryDefContext)_localctx).funcArgList.ID(i).getText(), _localctx.className, (((QueryDefContext)_localctx).ID!=null?((QueryDefContext)_localctx).ID.getText():null), (((QueryDefContext)_localctx).ID!=null?((QueryDefContext)_localctx).ID.getLine():0)));
+
+				    arguments.put(((QueryDefContext)_localctx).funcArgList.ID(i).getText(), ((QueryDefContext)_localctx).funcArgList.typeId(i).getText());
+				}
+
+				if (!methodsSymbolTable.containsKey(_localctx.className))
+				    methodsSymbolTable.put(_localctx.className, new java.util.HashMap<>());
+
+				if (methodsSymbolTable.get(_localctx.className).containsKey((((QueryDefContext)_localctx).ID!=null?((QueryDefContext)_localctx).ID.getText():null)))
+				    throw new RuntimeException(String.format("Two methods with same inditificators (%s) in class %s. Line %d",
+				                    (((QueryDefContext)_localctx).ID!=null?((QueryDefContext)_localctx).ID.getText():null), _localctx.className, (((QueryDefContext)_localctx).ID!=null?((QueryDefContext)_localctx).ID.getLine():0)));
+				                    
+				methodsSymbolTable.get(_localctx.className).put((((QueryDefContext)_localctx).ID!=null?((QueryDefContext)_localctx).ID.getText():null), new MethodInfo((((QueryDefContext)_localctx).typeId!=null?_input.getText(((QueryDefContext)_localctx).typeId.start,((QueryDefContext)_localctx).typeId.stop):null), (((QueryDefContext)_localctx).ID!=null?((QueryDefContext)_localctx).ID.getText():null), arguments));
 
 				}
 				break;
@@ -1662,7 +1699,7 @@ public class SimpleDBGrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3$\u00f5\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3%\u00f5\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\3\2\3\2\7\2\'\n\2\f\2\16\2*\13\2\3\3\3\3\3\3\3\3\3\4\3\4\3\4\5\4\63\n"+
@@ -1686,54 +1723,54 @@ public class SimpleDBGrammarParser extends Parser {
 		"\3\2\2\2\24\u00a9\3\2\2\2\26\u00ab\3\2\2\2\30\u00cb\3\2\2\2\32\u00d6\3"+
 		"\2\2\2\34\u00d8\3\2\2\2\36\u00e5\3\2\2\2 \u00ed\3\2\2\2\"\u00f0\3\2\2"+
 		"\2$(\5\4\3\2%\'\5\n\6\2&%\3\2\2\2\'*\3\2\2\2(&\3\2\2\2()\3\2\2\2)\3\3"+
-		"\2\2\2*(\3\2\2\2+,\7\23\2\2,-\7#\2\2-.\7\22\2\2.\5\3\2\2\2/\62\7#\2\2"+
+		"\2\2\2*(\3\2\2\2+,\7\23\2\2,-\7$\2\2-.\7\22\2\2.\5\3\2\2\2/\62\7$\2\2"+
 		"\60\61\7\35\2\2\61\63\7\36\2\2\62\60\3\2\2\2\62\63\3\2\2\2\63\7\3\2\2"+
-		"\2\64\65\5\6\4\2\65\66\7#\2\2\66\67\7\22\2\2\678\b\5\1\28\t\3\2\2\29:"+
-		"\7\24\2\2:;\7#\2\2;@\7\31\2\2<?\5\b\5\2=?\5\26\f\2><\3\2\2\2>=\3\2\2\2"+
+		"\2\64\65\5\6\4\2\65\66\7$\2\2\66\67\7\22\2\2\678\b\5\1\28\t\3\2\2\29:"+
+		"\7\24\2\2:;\7$\2\2;@\7\31\2\2<?\5\b\5\2=?\5\26\f\2><\3\2\2\2>=\3\2\2\2"+
 		"?B\3\2\2\2@>\3\2\2\2@A\3\2\2\2AC\3\2\2\2B@\3\2\2\2CD\7\32\2\2DE\b\6\1"+
-		"\2E\13\3\2\2\2FK\7#\2\2GH\7\33\2\2HI\5\22\n\2IJ\7\34\2\2JL\3\2\2\2KG\3"+
-		"\2\2\2KL\3\2\2\2LW\3\2\2\2MN\7\37\2\2NS\7#\2\2OP\7\33\2\2PQ\5\22\n\2Q"+
+		"\2E\13\3\2\2\2FK\7$\2\2GH\7\33\2\2HI\5\22\n\2IJ\7\34\2\2JL\3\2\2\2KG\3"+
+		"\2\2\2KL\3\2\2\2LW\3\2\2\2MN\7\37\2\2NS\7$\2\2OP\7\33\2\2PQ\5\22\n\2Q"+
 		"R\7\34\2\2RT\3\2\2\2SO\3\2\2\2ST\3\2\2\2TV\3\2\2\2UM\3\2\2\2VY\3\2\2\2"+
 		"WU\3\2\2\2WX\3\2\2\2X\r\3\2\2\2YW\3\2\2\2Z[\b\b\1\2[\\\t\2\2\2\\e\5\16"+
-		"\b\r]e\5\f\7\2^e\7\"\2\2_e\5\"\22\2`a\7\33\2\2ab\5\16\b\2bc\7\34\2\2c"+
-		"e\3\2\2\2dZ\3\2\2\2d]\3\2\2\2d^\3\2\2\2d_\3\2\2\2d`\3\2\2\2e{\3\2\2\2"+
-		"fg\f\n\2\2gh\t\3\2\2hz\5\16\b\13ij\f\t\2\2jk\t\4\2\2kz\5\16\b\nlm\f\b"+
-		"\2\2mn\t\5\2\2nz\5\16\b\top\f\7\2\2pq\t\6\2\2qz\5\16\b\brs\f\f\2\2st\7"+
-		"\35\2\2tu\5\20\t\2uv\7\36\2\2vz\3\2\2\2wx\f\13\2\2xz\t\7\2\2yf\3\2\2\2"+
-		"yi\3\2\2\2yl\3\2\2\2yo\3\2\2\2yr\3\2\2\2yw\3\2\2\2z}\3\2\2\2{y\3\2\2\2"+
-		"{|\3\2\2\2|\17\3\2\2\2}{\3\2\2\2~\u0083\5\16\b\2\177\u0080\7 \2\2\u0080"+
+		"\b\r]e\5\f\7\2^e\7#\2\2_e\5\"\22\2`a\7\33\2\2ab\5\16\b\2bc\7\34\2\2ce"+
+		"\3\2\2\2dZ\3\2\2\2d]\3\2\2\2d^\3\2\2\2d_\3\2\2\2d`\3\2\2\2e{\3\2\2\2f"+
+		"g\f\n\2\2gh\t\3\2\2hz\5\16\b\13ij\f\t\2\2jk\t\4\2\2kz\5\16\b\nlm\f\b\2"+
+		"\2mn\t\5\2\2nz\5\16\b\top\f\7\2\2pq\t\6\2\2qz\5\16\b\brs\f\f\2\2st\7\35"+
+		"\2\2tu\5\20\t\2uv\7\36\2\2vz\3\2\2\2wx\f\13\2\2xz\t\7\2\2yf\3\2\2\2yi"+
+		"\3\2\2\2yl\3\2\2\2yo\3\2\2\2yr\3\2\2\2yw\3\2\2\2z}\3\2\2\2{y\3\2\2\2{"+
+		"|\3\2\2\2|\17\3\2\2\2}{\3\2\2\2~\u0083\5\16\b\2\177\u0080\7 \2\2\u0080"+
 		"\u0082\5\16\b\2\u0081\177\3\2\2\2\u0082\u0085\3\2\2\2\u0083\u0081\3\2"+
 		"\2\2\u0083\u0084\3\2\2\2\u0084\21\3\2\2\2\u0085\u0083\3\2\2\2\u0086\u0090"+
 		"\3\2\2\2\u0087\u008c\5\16\b\2\u0088\u0089\7 \2\2\u0089\u008b\5\16\b\2"+
 		"\u008a\u0088\3\2\2\2\u008b\u008e\3\2\2\2\u008c\u008a\3\2\2\2\u008c\u008d"+
 		"\3\2\2\2\u008d\u0090\3\2\2\2\u008e\u008c\3\2\2\2\u008f\u0086\3\2\2\2\u008f"+
 		"\u0087\3\2\2\2\u0090\23\3\2\2\2\u0091\u0092\7\25\2\2\u0092\u0093\5\16"+
-		"\b\2\u0093\u0094\7\22\2\2\u0094\u00aa\3\2\2\2\u0095\u0098\7#\2\2\u0096"+
+		"\b\2\u0093\u0094\7\22\2\2\u0094\u00aa\3\2\2\2\u0095\u0098\7$\2\2\u0096"+
 		"\u0097\7\35\2\2\u0097\u0099\7\36\2\2\u0098\u0096\3\2\2\2\u0098\u0099\3"+
-		"\2\2\2\u0099\u009a\3\2\2\2\u009a\u009b\7#\2\2\u009b\u009c\7\17\2\2\u009c"+
+		"\2\2\2\u0099\u009a\3\2\2\2\u009a\u009b\7$\2\2\u009b\u009c\7\17\2\2\u009c"+
 		"\u009d\5\16\b\2\u009d\u009e\7\22\2\2\u009e\u00aa\3\2\2\2\u009f\u00a0\7"+
-		"#\2\2\u00a0\u00a1\t\b\2\2\u00a1\u00a2\5\16\b\2\u00a2\u00a3\7\22\2\2\u00a3"+
+		"$\2\2\u00a0\u00a1\t\b\2\2\u00a1\u00a2\5\16\b\2\u00a2\u00a3\7\22\2\2\u00a3"+
 		"\u00aa\3\2\2\2\u00a4\u00a5\5\f\7\2\u00a5\u00a6\7\22\2\2\u00a6\u00aa\3"+
 		"\2\2\2\u00a7\u00aa\5\34\17\2\u00a8\u00aa\5\36\20\2\u00a9\u0091\3\2\2\2"+
 		"\u00a9\u0095\3\2\2\2\u00a9\u009f\3\2\2\2\u00a9\u00a4\3\2\2\2\u00a9\u00a7"+
 		"\3\2\2\2\u00a9\u00a8\3\2\2\2\u00aa\25\3\2\2\2\u00ab\u00ac\5\6\4\2\u00ac"+
-		"\u00ad\7#\2\2\u00ad\u00ae\7\33\2\2\u00ae\u00af\5\30\r\2\u00af\u00bd\7"+
-		"\34\2\2\u00b0\u00b1\7!\2\2\u00b1\u00b2\5\16\b\2\u00b2\u00b3\7\22\2\2\u00b3"+
-		"\u00b4\b\f\1\2\u00b4\u00be\3\2\2\2\u00b5\u00b9\7\31\2\2\u00b6\u00b8\5"+
-		"\24\13\2\u00b7\u00b6\3\2\2\2\u00b8\u00bb\3\2\2\2\u00b9\u00b7\3\2\2\2\u00b9"+
-		"\u00ba\3\2\2\2\u00ba\u00bc\3\2\2\2\u00bb\u00b9\3\2\2\2\u00bc\u00be\7\32"+
-		"\2\2\u00bd\u00b0\3\2\2\2\u00bd\u00b5\3\2\2\2\u00be\27\3\2\2\2\u00bf\u00cc"+
-		"\3\2\2\2\u00c0\u00c1\5\6\4\2\u00c1\u00c8\7#\2\2\u00c2\u00c3\7 \2\2\u00c3"+
-		"\u00c4\5\6\4\2\u00c4\u00c5\7#\2\2\u00c5\u00c7\3\2\2\2\u00c6\u00c2\3\2"+
-		"\2\2\u00c7\u00ca\3\2\2\2\u00c8\u00c6\3\2\2\2\u00c8\u00c9\3\2\2\2\u00c9"+
+		"\u00ad\7$\2\2\u00ad\u00ae\7\33\2\2\u00ae\u00af\5\30\r\2\u00af\u00bd\7"+
+		"\34\2\2\u00b0\u00b1\7\"\2\2\u00b1\u00b2\5\16\b\2\u00b2\u00b3\7\22\2\2"+
+		"\u00b3\u00b4\b\f\1\2\u00b4\u00be\3\2\2\2\u00b5\u00b9\7\31\2\2\u00b6\u00b8"+
+		"\5\24\13\2\u00b7\u00b6\3\2\2\2\u00b8\u00bb\3\2\2\2\u00b9\u00b7\3\2\2\2"+
+		"\u00b9\u00ba\3\2\2\2\u00ba\u00bc\3\2\2\2\u00bb\u00b9\3\2\2\2\u00bc\u00be"+
+		"\7\32\2\2\u00bd\u00b0\3\2\2\2\u00bd\u00b5\3\2\2\2\u00be\27\3\2\2\2\u00bf"+
+		"\u00cc\3\2\2\2\u00c0\u00c1\5\6\4\2\u00c1\u00c8\7$\2\2\u00c2\u00c3\7 \2"+
+		"\2\u00c3\u00c4\5\6\4\2\u00c4\u00c5\7$\2\2\u00c5\u00c7\3\2\2\2\u00c6\u00c2"+
+		"\3\2\2\2\u00c7\u00ca\3\2\2\2\u00c8\u00c6\3\2\2\2\u00c8\u00c9\3\2\2\2\u00c9"+
 		"\u00cc\3\2\2\2\u00ca\u00c8\3\2\2\2\u00cb\u00bf\3\2\2\2\u00cb\u00c0\3\2"+
 		"\2\2\u00cc\31\3\2\2\2\u00cd\u00d7\5\24\13\2\u00ce\u00d2\7\31\2\2\u00cf"+
 		"\u00d1\5\24\13\2\u00d0\u00cf\3\2\2\2\u00d1\u00d4\3\2\2\2\u00d2\u00d0\3"+
 		"\2\2\2\u00d2\u00d3\3\2\2\2\u00d3\u00d5\3\2\2\2\u00d4\u00d2\3\2\2\2\u00d5"+
 		"\u00d7\7\32\2\2\u00d6\u00cd\3\2\2\2\u00d6\u00ce\3\2\2\2\u00d7\33\3\2\2"+
-		"\2\u00d8\u00d9\7\26\2\2\u00d9\u00da\7\33\2\2\u00da\u00dd\7#\2\2\u00db"+
+		"\2\u00d8\u00d9\7\26\2\2\u00d9\u00da\7\33\2\2\u00da\u00dd\7$\2\2\u00db"+
 		"\u00dc\7\35\2\2\u00dc\u00de\7\36\2\2\u00dd\u00db\3\2\2\2\u00dd\u00de\3"+
-		"\2\2\2\u00de\u00df\3\2\2\2\u00df\u00e0\7#\2\2\u00e0\u00e1\7!\2\2\u00e1"+
+		"\2\2\2\u00de\u00df\3\2\2\2\u00df\u00e0\7$\2\2\u00e0\u00e1\7!\2\2\u00e1"+
 		"\u00e2\5\16\b\2\u00e2\u00e3\7\34\2\2\u00e3\u00e4\5\32\16\2\u00e4\35\3"+
 		"\2\2\2\u00e5\u00e6\7\27\2\2\u00e6\u00e7\7\33\2\2\u00e7\u00e8\5\16\b\2"+
 		"\u00e8\u00e9\7\34\2\2\u00e9\u00eb\5\32\16\2\u00ea\u00ec\5 \21\2\u00eb"+

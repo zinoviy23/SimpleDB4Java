@@ -8,8 +8,28 @@ public static final java.util.Set<String> classesSymbolTable = new java.util.Has
 // table for fields
 public static final java.util.Map<String, java.util.Map<String, String>> fieldsSymbolTable = new java.util.HashMap<>();
 
+// class for methods
+public static class MethodInfo {
+    public final String type;
+
+    public final String name;
+
+    public final java.util.LinkedHashMap<String, String> arguments;
+
+    public MethodInfo(String type, String name, java.util.LinkedHashMap<String, String> arguments) {
+        this.name = name;
+        this.type = type;
+        this.arguments = arguments;
+    }
+
+    @Override
+    public String toString() {
+        return "{type=" + type + ", name=" + name + ", arguments=" + arguments +"}";
+    }
+}
+
 // table for methods
-public static final java.util.Map<String, java.util.Map<String, String>> methodsSymbolTable = new java.util.HashMap<>();
+public static final java.util.Map<String, java.util.Map<String, MethodInfo>> methodsSymbolTable = new java.util.HashMap<>();
 }
 
 file : fileHeader (classDef)*; // root node
@@ -39,11 +59,27 @@ arrIndexList : expression (COMMA expression)*; // for arrays
 callArgList : | expression (COMMA expression)*; // call arguments
 simpleCommand : RETURNKW expression CMDEND | ID(LSQBR RSQBR)? ID '=' expression CMDEND | ID  ('='|'+='|'-=') expression CMDEND |
     dottedId CMDEND| forCycle | ifStatement; // simple command
-queryDef[String className] : typeId ID LPAR funcArgList RPAR (DOUBLEDOT expression CMDEND
+queryDef[String className] : typeId ID LPAR funcArgList RPAR (LEFTARROW expression CMDEND
 {
-for (int i = 0; i < $funcArgList.ctx.ID().size(); i++)
-    System.out.println($funcArgList.ctx.ID(i).getText());
-} |
+java.util.LinkedHashMap<String, String> arguments = new java.util.LinkedHashMap<>();
+for (int i = 0; i < $funcArgList.ctx.ID().size(); i++) {
+    if (arguments.containsKey($funcArgList.ctx.ID(i).getText()))
+        throw new RuntimeException(String.format("Two arguments with same inditificators (%s) in class %s in method %s. Line %d",
+                $funcArgList.ctx.ID(i).getText(), $className, $ID.text, $ID.line));
+
+    arguments.put($funcArgList.ctx.ID(i).getText(), $funcArgList.ctx.typeId(i).getText());
+}
+
+if (!methodsSymbolTable.containsKey($className))
+    methodsSymbolTable.put($className, new java.util.HashMap<>());
+
+if (methodsSymbolTable.get($className).containsKey($ID.text))
+    throw new RuntimeException(String.format("Two methods with same inditificators (%s) in class %s. Line %d",
+                    $ID.text, $className, $ID.line));
+
+methodsSymbolTable.get($className).put($ID.text, new MethodInfo($typeId.text, $ID.text, arguments));
+}
+|
     LBRACE simpleCommand* RBRACE); // definition of query method
 funcArgList : | typeId ID (COMMA typeId ID)*; // arguments
 block :  simpleCommand | LBRACE (simpleCommand)* RBRACE; // block {}
@@ -68,6 +104,7 @@ RSQBR : ']';
 DOT : '.';
 COMMA : ',';
 DOUBLEDOT : ':';
+LEFTARROW: '->';
 CONSTANT : (INT|FLOAT|NULL|BOOLEAN|STRING);
 ID : [a-zA-Z_][a-zA-Z_0-9]*;
 SKIP_ : (WS | COMMENT) -> skip;

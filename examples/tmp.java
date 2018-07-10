@@ -5,8 +5,8 @@ class User {
 	String name;
 	Animal[] animals;
 	
-	User getMaxAgeUser() : User.max(User.age);
-	int getMinAgeUserId() : User.min(User.age).id;
+	User getMaxAgeUser() -> User.max(User.age);
+	int getMinAgeUserId() -> User.min(User.age).id;
 }
 
 class Animal {
@@ -15,7 +15,7 @@ class Animal {
 	String type;
 	User user;
 	
-	Animal getByUser(User user) : Animal.find(Animal.user == user);
+	Animal getByUser(User user) -> Animal.find(Animal.user == user);
 	int getMediumAge() {
 		return Animal.sum(Animal.age) / Animal.count();
 	} 
@@ -34,6 +34,8 @@ class Purchase {
 			    sum += p.amount;
 		return sum;
 	}
+
+	float kek(int a, int b, int c) -> a + b + c;
 }
 
 
