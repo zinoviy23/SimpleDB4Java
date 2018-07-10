@@ -91,7 +91,12 @@ public class GeneratedClassTest {
                         "            String.format(\"update A set a='%s', B='%s' where id=%d\"\n" +
                         "                , a, B, id));\n" +
                         "    }" +
-                        "\n\n}",
+                        "\n\n" +
+                        "    public static void removeById(long id) {\n" +
+                        "        DBService.getInstance().getExecutor().executeUpdate(" +
+                        "String.format(\"delete from A where id=%d\", id));\n" +
+                        "    }\n" +
+                        "\n}",
                 generatedClass.getGenereatedCode());
     }
 
@@ -123,11 +128,15 @@ public class GeneratedClassTest {
         GeneratedClass generatedClass = new GeneratedClass("A", "db");
         generatedClass.addField(new SimpleFieldWithSimpleType("int", "a"));
         generatedClass.addField(new SimpleFieldWithSimpleType("String", "B"));
+        generatedClass.addField(new SimpleFieldWithComplexType("L", "lol"));
 
         assertEquals("    public static Optional<A> getById(long id) {\n" +
                 "        A obj = DBService.getInstance().getExecutor().executeQuery(\n" +
-                "            String.format(\"select a, B from A where id=%d\", id),\n" +
-                "            set -> !set.isClosed() ? new A(set.getInt(1), set.getString(2)) : null);\n" +
+                "            String.format(\"select a, B, lol from A where id=%d\", id),\n" +
+                "            set -> !set.isClosed() ? new A(set.getInt(1), set.getString(2), \n" +
+                "                L.getById(set.getLong(3)).orElseThrow(() -> new RuntimeException(" +
+                "\"Wrong data! Can't find L by id!\"))\n" +
+                "            ) : null);\n" +
                 "        if (obj == null)\n" +
                 "            return Optional.empty();\n" +
                 "        obj.id = id;\n" +
@@ -233,9 +242,25 @@ public class GeneratedClassTest {
         assertEquals("    private void update() {\n" +
                 "        DBService.getInstance().getExecutor().executeUpdate(\n" +
                 "            String.format(\"update A set a='%s', B='%s', lol='%s' where id=%d\"\n" +
-                "                , a, B, lol.getId(), id));\n" +
+                "                , a, B, lol, id));\n" +
                 "    }\n" +
                 "\n", generatedClass.getUpdateMethod());
 
+    }
+
+    /**
+     * Tests removeById() method generation
+     */
+    @Test
+    public void getRemoveByIdMethodTest() {
+        GeneratedClass generatedClass = new GeneratedClass("A", "db");
+        generatedClass.addField(new SimpleFieldWithSimpleType("int", "a"));
+        generatedClass.addField(new SimpleFieldWithSimpleType("String", "B"));
+        generatedClass.addField(new SimpleFieldWithComplexType("L", "lol"));
+
+        assertEquals("    public static void removeById(long id) {\n" +
+                "        DBService.getInstance().getExecutor().executeUpdate(String.format(\"delete from A where id=%d\", id));\n" +
+                "    }\n" +
+                "\n", generatedClass.getRemoveByIdMehtod());
     }
 }

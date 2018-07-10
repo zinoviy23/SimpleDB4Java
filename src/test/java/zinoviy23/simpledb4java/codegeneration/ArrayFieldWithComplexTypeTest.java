@@ -16,7 +16,7 @@ public class ArrayFieldWithComplexTypeTest {
         ArrayFieldWithComplexType field = new ArrayFieldWithComplexType("Animal", "field", "User_Animal_field");
 
         assertEquals("    public List<Animal> getField() {\n" +
-                "        return DBService().getInstance().getExecutor().executeQuery(\n" +
+                "        return DBService.getInstance().getExecutor().executeQuery(\n" +
                 "            String.format(\"select second from User_Animal_field where first=%d\", id),\n" +
                 "            set -> {\n" +
                 "                List<Animal> list = new ArrayList<>();\n" +
@@ -36,7 +36,7 @@ public class ArrayFieldWithComplexTypeTest {
         ArrayFieldWithComplexType field = new ArrayFieldWithComplexType("Animal", "field", "User_Animal_field");
 
         assertEquals("    public void addField(Animal field) {\n" +
-                "        DBService().getInstance().getExecutor().executeUpdate(\n" +
+                "        DBService.getInstance().getExecutor().executeUpdate(\n" +
                 "            String.format(\"insert into User_Animal_field (first, second) values (%d, %d)\", id, field.getId())\n" +
                 "        );\n" +
                 "    }\n\n", field.getAddMethod());
@@ -50,7 +50,7 @@ public class ArrayFieldWithComplexTypeTest {
         ArrayFieldWithComplexType field = new ArrayFieldWithComplexType("Animal", "field", "User_Animal_field");
 
         assertEquals("    public void removeField(Animal field) {\n" +
-                "        DBService().getInstance().getExecutor().executeUpdate(\n" +
+                "        DBService.getInstance().getExecutor().executeUpdate(\n" +
                 "            String.format(\"delete from User_Animal_field where first=%d and second=%d\", id, field.getId())\n" +
                 "        );\n" +
                 "    }\n\n", field.getRemoveMethod());
@@ -64,7 +64,7 @@ public class ArrayFieldWithComplexTypeTest {
         ArrayFieldWithComplexType field = new ArrayFieldWithComplexType("Animal", "field", "User_Animal_field");
 
         assertEquals("    public List<Animal> getField() {\n" +
-                "        return DBService().getInstance().getExecutor().executeQuery(\n" +
+                "        return DBService.getInstance().getExecutor().executeQuery(\n" +
                 "            String.format(\"select second from User_Animal_field where first=%d\", id),\n" +
                 "            set -> {\n" +
                 "                List<Animal> list = new ArrayList<>();\n" +
@@ -76,13 +76,13 @@ public class ArrayFieldWithComplexTypeTest {
                 "    }\n" +
                 "\n" +
                 "    public void addField(Animal field) {\n" +
-                "        DBService().getInstance().getExecutor().executeUpdate(\n" +
+                "        DBService.getInstance().getExecutor().executeUpdate(\n" +
                 "            String.format(\"insert into User_Animal_field (first, second) values (%d, %d)\", id, field.getId())\n" +
                 "        );\n" +
                 "    }\n" +
                 "\n" +
                 "    public void removeField(Animal field) {\n" +
-                "        DBService().getInstance().getExecutor().executeUpdate(\n" +
+                "        DBService.getInstance().getExecutor().executeUpdate(\n" +
                 "            String.format(\"delete from User_Animal_field where first=%d and second=%d\", id, field.getId())\n" +
                 "        );\n" +
                 "    }\n" +

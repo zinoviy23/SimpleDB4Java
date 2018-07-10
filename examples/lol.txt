@@ -66,4 +66,7 @@
                 , a, B, id));
     }
 
+    public static void removeById(long id) {
+        DBService.getInstance().getExecutor().executeUpdate(String.format("delete from A where id=%d", id));
+    }
 

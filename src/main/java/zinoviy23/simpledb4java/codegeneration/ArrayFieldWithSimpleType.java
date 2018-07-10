@@ -63,7 +63,7 @@ public class ArrayFieldWithSimpleType implements GeneratedField{
     String getArrayMethod() {
         return String.format(
                 "    public List<%s> get%s() {\n" +
-                        "        return DBService().getInstance().getExecutor().executeQuery(\n" +
+                        "        return DBService.getInstance().getExecutor().executeQuery(\n" +
                         "            String.format(\"select second from %s where first=%%d\", id),\n" +
                         "            set -> {\n" +
                         "                List<%s> list = new ArrayList<>();\n" +
@@ -85,7 +85,7 @@ public class ArrayFieldWithSimpleType implements GeneratedField{
      */
     String getAddMethod() {
         return String.format("    public void add%s(%s %s) {\n" +
-                "        DBService().getInstance().getExecutor().executeUpdate(\n" +
+                "        DBService.getInstance().getExecutor().executeUpdate(\n" +
                 "            String.format(\"insert into %s (first, second) values(%%d, '%%s')\", id, %s)\n" +
                 "        );\n" +
                 "    }\n" +
@@ -99,7 +99,7 @@ public class ArrayFieldWithSimpleType implements GeneratedField{
      */
     String getRemoveMethod() {
         return String.format("    public void remove%s(%s %s) {\n" +
-                "        DBService().getInstance().getExecutor().executeUpdate(\n" +
+                "        DBService.getInstance().getExecutor().executeUpdate(\n" +
                 "            String.format(\"delete from %s where first=%%d and second='%%s'\", id, %s)\n" +
                 "        );\n" +
                 "    }\n" +

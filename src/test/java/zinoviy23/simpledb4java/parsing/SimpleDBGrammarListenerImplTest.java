@@ -37,9 +37,9 @@ public class SimpleDBGrammarListenerImplTest {
         assertEquals(2, DBInformation.getInstance().size());
         assertEquals(1, DBInformation.getInstance().getArrayTables().size());
         assertEquals("MyDB", DBInformation.getInstance().getDbName());
-        assertEquals(3, DBInformation.getInstance().getTable("A").size());
-        assertEquals(TableInformation.ColumnType.INT , DBInformation.getInstance().getTable("B").get(0).getType());
-        assertEquals("age", DBInformation.getInstance().getTable("A").get(0).getName());
+        assertEquals(4, DBInformation.getInstance().getTable("A").size());
+        assertEquals(TableInformation.ColumnType.INT , DBInformation.getInstance().getTable("B").get(1).getType());
+        assertEquals("age", DBInformation.getInstance().getTable("A").get(1).getName());
         assertEquals("B_A_as", DBInformation.getInstance().getArrayTables().get(0).getTableName());
 
         DBInformation.getInstance().clear();

@@ -68,6 +68,7 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
     public void enterClassDef(SimpleDBGrammarParser.ClassDefContext ctx) {
         currentTable = new TableInformation(ctx.ID().getSymbol().getText());
         generatedClasses.add(new GeneratedClass(ctx.ID().getSymbol().getText(), PACKAGE_NAME));
+        currentTable.add(new TableInformation.ColumnInfo("id", TableInformation.ColumnType.ID));
     }
 
     @Override

@@ -94,7 +94,8 @@ public class GeneratedClass {
         }
 
         sb.append(getAllMethod()).append(getGetByIdMethod()).append(getMinMaxMethods()).append(getFindMethods())
-            .append(getConstructor()).append(getCreateMethod()).append(getUpdateMethod()).append("}");
+            .append(getConstructor()).append(getCreateMethod()).append(getUpdateMethod())
+                .append(getRemoveByIdMehtod()).append("}");
 
 
         return sb.toString();
@@ -140,8 +141,15 @@ public class GeneratedClass {
             if (! (field instanceof ArrayFieldWithSimpleType || field instanceof ArrayFieldWithComplexType)) {
                 somethingAdded = true;
                 fieldNamesSb.append(field.getName()).append(", ");
-                constructorArgsSb.append("set.get").append(Utils.getMethodNameByType(field.getType())).append("(").append(ind++)
-                        .append("), ");
+                if (field instanceof SimpleFieldWithSimpleType)
+                    constructorArgsSb.append("set.get").append(Utils.getMethodNameByType(field.getType())).append("(").append(ind++)
+                            .append("), ");
+                else
+                    constructorArgsSb.append("\n                ").append(field.getType())
+                            .append(".getById(set.getLong(").append(ind++)
+                            .append(")).orElseThrow(() -> new RuntimeException(\"Wrong data! Can't find ")
+                            .append(field.getType()).append(" by id!\"").append("))\n            , ");
+
             }
         }
 
@@ -303,8 +311,6 @@ public class GeneratedClass {
                 queryParamsSb.append(field.getName()).append("='%s', ");
 
                 formatterParamsSb.append(field.getName());
-                if (field instanceof SimpleFieldWithComplexType)
-                    formatterParamsSb.append(".getId()");
                 formatterParamsSb.append(", ");
             }
         }
@@ -321,6 +327,16 @@ public class GeneratedClass {
                 "            String.format(\"update %s set %s where id=%%d\"\n" +
                 "                %s, id));\n" +
                 "    }\n\n", name, queryParamsSb.toString(), formatterParamsSb.toString());
+    }
+
+    /**
+     * Generates code for removeById method
+     * @return code for removeById method
+     */
+    String getRemoveByIdMehtod() {
+        return String.format("    public static void removeById(long id) {\n" +
+                "        DBService.getInstance().getExecutor().executeUpdate(String.format(\"delete from %s where id=%%d\", id));\n" +
+                "    }\n\n", name);
     }
 
 }

@@ -66,7 +66,7 @@ public class ArrayFieldWithComplexType implements GeneratedField {
         return
                 String.format(
                         "    public List<%s> get%s() {\n" +
-                        "        return DBService().getInstance().getExecutor().executeQuery(\n" +
+                        "        return DBService.getInstance().getExecutor().executeQuery(\n" +
                         "            String.format(\"select second from %s where first=%%d\", id),\n" +
                         "            set -> {\n" +
                         "                List<%s> list = new ArrayList<>();\n" +
@@ -87,7 +87,7 @@ public class ArrayFieldWithComplexType implements GeneratedField {
         return
                 String.format("" +
                         "    public void add%s(%s %s) {\n" +
-                        "        DBService().getInstance().getExecutor().executeUpdate(\n" +
+                        "        DBService.getInstance().getExecutor().executeUpdate(\n" +
                         "            String.format(\"insert into %s (first, second) values (%%d, %%d)\", id, %s.getId())\n" +
                         "        );\n" +
                         "    }\n\n",
@@ -102,7 +102,7 @@ public class ArrayFieldWithComplexType implements GeneratedField {
         return
                 String.format("" +
                         "    public void remove%s(%s %s) {\n" +
-                        "        DBService().getInstance().getExecutor().executeUpdate(\n" +
+                        "        DBService.getInstance().getExecutor().executeUpdate(\n" +
                         "            String.format(\"delete from %s where first=%%d and second=%%d\", id, %s.getId())\n" +
                         "        );\n" +
                         "    }\n\n", Utils.getStringWithCapitalFirstChar(name), type, name, tableName, name);

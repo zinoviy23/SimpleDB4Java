@@ -31,13 +31,19 @@ public class Main {
             LinkedList<GeneratedClass> classes = new LinkedList<>();
             walker.walk(new SimpleDBGrammarListenerImpl(classes), syntaxTree);
 
-            //DBInformation.getInstance().createDBSQLite("jdbc:sqlite:/home/sanusha/Proga/SimpleDB4Java",
-              //      "org.sqlite.JDBC");
+            DBInformation.getInstance().createDBSQLite("jdbc:sqlite:/home/sanusha/Proga/SimpleDB4Java",
+                    "org.sqlite.JDBC");
             for (GeneratedClass cl: classes) {
                 System.out.println(cl.getGenereatedCode());
                 System.out.println(cl);
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

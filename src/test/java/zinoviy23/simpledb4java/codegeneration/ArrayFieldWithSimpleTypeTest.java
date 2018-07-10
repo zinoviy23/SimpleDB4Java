@@ -18,7 +18,7 @@ public class ArrayFieldWithSimpleTypeTest {
 
         assertEquals(
                 "    public List<Integer> getInts() {\n" +
-                        "        return DBService().getInstance().getExecutor().executeQuery(\n" +
+                        "        return DBService.getInstance().getExecutor().executeQuery(\n" +
                         "            String.format(\"select second from User_int_ints where first=%d\", id),\n" +
                         "            set -> {\n" +
                         "                List<Integer> list = new ArrayList<>();\n" +
@@ -39,7 +39,7 @@ public class ArrayFieldWithSimpleTypeTest {
         ArrayFieldWithSimpleType field = new ArrayFieldWithSimpleType("int", "ints", "User_int_ints");
 
         assertEquals("    public void addInts(int ints) {\n" +
-                "        DBService().getInstance().getExecutor().executeUpdate(\n" +
+                "        DBService.getInstance().getExecutor().executeUpdate(\n" +
                 "            String.format(\"insert into User_int_ints (first, second) values(%d, '%s')\", id, ints)\n" +
                 "        );\n" +
                 "    }\n" +
@@ -54,7 +54,7 @@ public class ArrayFieldWithSimpleTypeTest {
         ArrayFieldWithSimpleType field = new ArrayFieldWithSimpleType("String", "str", "User_String_str");
 
         assertEquals("    public void removeStr(String str) {\n" +
-                "        DBService().getInstance().getExecutor().executeUpdate(\n" +
+                "        DBService.getInstance().getExecutor().executeUpdate(\n" +
                 "            String.format(\"delete from User_String_str where first=%d and second='%s'\", id, str)\n" +
                 "        );\n" +
                 "    }\n" +
@@ -66,7 +66,7 @@ public class ArrayFieldWithSimpleTypeTest {
         ArrayFieldWithSimpleType field = new ArrayFieldWithSimpleType("int", "ints", "User_int_ints");
 
         assertEquals("    public List<Integer> getInts() {\n" +
-                "        return DBService().getInstance().getExecutor().executeQuery(\n" +
+                "        return DBService.getInstance().getExecutor().executeQuery(\n" +
                 "            String.format(\"select second from User_int_ints where first=%d\", id),\n" +
                 "            set -> {\n" +
                 "                List<Integer> list = new ArrayList<>();\n" +
@@ -78,13 +78,13 @@ public class ArrayFieldWithSimpleTypeTest {
                 "    }\n" +
                 "\n" +
                 "    public void addInts(int ints) {\n" +
-                "        DBService().getInstance().getExecutor().executeUpdate(\n" +
+                "        DBService.getInstance().getExecutor().executeUpdate(\n" +
                 "            String.format(\"insert into User_int_ints (first, second) values(%d, '%s')\", id, ints)\n" +
                 "        );\n" +
                 "    }\n" +
                 "\n" +
                 "    public void removeInts(int ints) {\n" +
-                "        DBService().getInstance().getExecutor().executeUpdate(\n" +
+                "        DBService.getInstance().getExecutor().executeUpdate(\n" +
                 "            String.format(\"delete from User_int_ints where first=%d and second='%s'\", id, ints)\n" +
                 "        );\n" +
                 "    }\n" +
