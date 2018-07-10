@@ -28,6 +28,16 @@ public interface SimpleDBGrammarListener extends ParseTreeListener {
 	 */
 	void exitFileHeader(SimpleDBGrammarParser.FileHeaderContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#typeId}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeId(SimpleDBGrammarParser.TypeIdContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleDBGrammarParser#typeId}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeId(SimpleDBGrammarParser.TypeIdContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#fieldDef}.
 	 * @param ctx the parse tree
 	 */

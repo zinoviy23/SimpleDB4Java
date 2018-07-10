@@ -23,6 +23,12 @@ public interface SimpleDBGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFileHeader(SimpleDBGrammarParser.FileHeaderContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#typeId}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeId(SimpleDBGrammarParser.TypeIdContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#fieldDef}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

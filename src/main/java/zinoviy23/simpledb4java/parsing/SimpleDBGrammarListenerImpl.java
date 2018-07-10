@@ -33,32 +33,40 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
     @Override
     public void enterFileHeader(SimpleDBGrammarParser.FileHeaderContext ctx) {
         DBInformation.getInstance().setDbName(ctx.ID().getSymbol().getText());
+
+        SimpleDBGrammarParser.classesSymbolTable.forEach(System.out::println);
+
+        SimpleDBGrammarParser.fieldsSymbolTable.forEach((key, value) -> {
+            System.out.print(key + " : ");
+            value.forEach((name, type) -> System.out.print(name + " " + type + "; "));
+            System.out.println();
+        });
     }
 
     @Override
     public void enterFieldDef(SimpleDBGrammarParser.FieldDefContext ctx) {
         GeneratedField field = null;
-        if (ctx.LSQBR() == null) {
-            currentTable.add(new TableInformation.ColumnInfo(ctx.ID(1).getSymbol().getText(),
-                    TableInformation.ColumnType.fromString(ctx.ID(0).getSymbol().getText())));
+        if (ctx.typeId().LSQBR() == null) {
+            currentTable.add(new TableInformation.ColumnInfo(ctx.ID().getSymbol().getText(),
+                    TableInformation.ColumnType.fromString(ctx.typeId().ID().getSymbol().getText())));
 
-            if (simpleTypes.contains(ctx.ID(0).getSymbol().getText()))
-                field = new SimpleFieldWithSimpleType(ctx.ID(0).getSymbol().getText(), ctx.ID(1).getSymbol().getText());
+            if (simpleTypes.contains(ctx.typeId().ID().getSymbol().getText()))
+                field = new SimpleFieldWithSimpleType(ctx.typeId().ID().getSymbol().getText(), ctx.ID().getSymbol().getText());
             else
-                field = new SimpleFieldWithComplexType(ctx.ID(0).getSymbol().getText(), ctx.ID(1).getSymbol().getText());
+                field = new SimpleFieldWithComplexType(ctx.typeId().ID().getSymbol().getText(), ctx.ID().getSymbol().getText());
 
         } else {
             DBArrayTableInfo tableInfo = new DBArrayTableInfo(currentTable.getName(),
-                    ctx.ID(0).getSymbol().getText(),
-                    ctx.ID(1).getSymbol().getText());
+                    ctx.typeId().ID().getSymbol().getText(),
+                    ctx.ID().getSymbol().getText());
 
             DBInformation.getInstance().addArrayTable(tableInfo);
 
-            if (simpleTypes.contains(ctx.ID(0).getSymbol().getText()))
-                field = new ArrayFieldWithSimpleType(ctx.ID(0).getSymbol().getText(), ctx.ID(1).getSymbol().getText(),
+            if (simpleTypes.contains(ctx.typeId().ID().getSymbol().getText()))
+                field = new ArrayFieldWithSimpleType(ctx.typeId().ID().getSymbol().getText(), ctx.ID().getSymbol().getText(),
                         tableInfo.getTableName());
             else
-                field = new ArrayFieldWithComplexType(ctx.ID(0).getSymbol().getText(), ctx.ID(1).getSymbol().getText(),
+                field = new ArrayFieldWithComplexType(ctx.typeId().ID().getSymbol().getText(), ctx.ID().getSymbol().getText(),
                         tableInfo.getTableName());
         }
         generatedClasses.getLast().addField(field);
@@ -77,6 +85,9 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
         currentTable = null;
     }
 
+    @Override
+    public void enterQueryDef(SimpleDBGrammarParser.QueryDefContext ctx) {
+    }
 
     public List<GeneratedClass> getGeneratedClassesArray() {
         return Collections.unmodifiableList(generatedClasses);

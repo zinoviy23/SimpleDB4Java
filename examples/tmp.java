@@ -5,8 +5,8 @@ class User {
 	String name;
 	Animal[] animals;
 	
-	query User getMaxAgeUser() : User.max(User.age);
-	query int getMinAgeUserId() : User.min(User.age).id;
+	User getMaxAgeUser() : User.max(User.age);
+	int getMinAgeUserId() : User.min(User.age).id;
 }
 
 class Animal {
@@ -15,8 +15,8 @@ class Animal {
 	String type;
 	User user;
 	
-	query Animal getByUser(User user) : Animal.find(Animal.user == user);
-	query int getMediumAge() {
+	Animal getByUser(User user) : Animal.find(Animal.user == user);
+	int getMediumAge() {
 		return Animal.sum(Animal.age) / Animal.count();
 	} 
 }
@@ -26,7 +26,7 @@ class Purchase {
 	User user;
 	String product;
 
-	query float getUserPurchasesAmount(User user) {
+	float getUserPurchasesAmount(User user) {
 		float sum = 0;
 		Purchase[] ps = Purchase.findAll(Purchase.user == user);
 		for (Purchase p : ps)

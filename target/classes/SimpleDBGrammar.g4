@@ -1,14 +1,34 @@
 grammar SimpleDBGrammar;
 
+@parser::members
+{
+// table for classes
+public static final java.util.Set<String> classesSymbolTable = new java.util.HashSet<>();
+
+// table for fields
+public static final java.util.Map<String, java.util.Map<String, String>> fieldsSymbolTable = new java.util.HashMap<>();
+
+// table for methods
+public static final java.util.Map<String, java.util.Map<String, String>> methodsSymbolTable = new java.util.HashMap<>();
+}
+
 file : fileHeader (classDef)*; // root node
 fileHeader : DATABASEKW ID CMDEND; // file header
-fieldDef : ID(LSQBR RSQBR)? ID CMDEND; // simpleFieldWithSimpleType definition
-classDef : CLASSKW ID LBRACE (fieldDef|queryDef)* RBRACE; // class definition
-dottedId : ID (DOT ID)*; // doted name like System.out.println
+typeId : ID(LSQBR RSQBR)?; // type inditificator
+fieldDef[String className] : typeId a=ID CMDEND
+{
+if (!fieldsSymbolTable.containsKey($className))
+    fieldsSymbolTable.put($className, new java.util.HashMap<>());
+if (fieldsSymbolTable.get($className).containsKey($a.text)) {
+    throw new RuntimeException(String.format("Two fields with same inditificators (%s) in class %s. Line %d",
+        $a.text, $className, $a.line));
+}
+fieldsSymbolTable.get($className).put($a.text, $typeId.text);
+}; // field definition
+classDef : CLASSKW ID LBRACE (fieldDef[$ID.text]|queryDef[$ID.text])* RBRACE {classesSymbolTable.add($ID.text);}; // class definition
+dottedId : ID (LPAR callArgList RPAR)? (DOT ID (LPAR callArgList RPAR)?)*; // doted name like System.out.println
 expression : ('-'|'+'|'++'|'--') expression | // expression
-    expression LPAR callArgList RPAR |
     expression LSQBR arrIndexList RSQBR |
-    expression DOT ID|
     expression ('++'|'--') |
     expression ('*'|'/') expression |
     expression ('+'|'-') expression |
@@ -18,9 +38,14 @@ expression : ('-'|'+'|'++'|'--') expression | // expression
 arrIndexList : expression (COMMA expression)*; // for arrays
 callArgList : | expression (COMMA expression)*; // call arguments
 simpleCommand : RETURNKW expression CMDEND | ID(LSQBR RSQBR)? ID '=' expression CMDEND | ID  ('='|'+='|'-=') expression CMDEND |
-    expression CMDEND| forCycle | ifStatement; // simple command
-queryDef : QUERYKW ID(LSQBR RSQBR)? ID LPAR funcArgList RPAR (DOUBLEDOT expression CMDEND | LBRACE simpleCommand* RBRACE); // definition of query method
-funcArgList : | ID ID (COMMA ID ID)*; // arguments
+    dottedId CMDEND| forCycle | ifStatement; // simple command
+queryDef[String className] : typeId ID LPAR funcArgList RPAR (DOUBLEDOT expression CMDEND
+{
+for (int i = 0; i < $funcArgList.ctx.ID().size(); i++)
+    System.out.println($funcArgList.ctx.ID(i).getText());
+} |
+    LBRACE simpleCommand* RBRACE); // definition of query method
+funcArgList : | typeId ID (COMMA typeId ID)*; // arguments
 block :  simpleCommand | LBRACE (simpleCommand)* RBRACE; // block {}
 forCycle : FORKW LPAR ID(LSQBR RSQBR)? ID DOUBLEDOT expression RPAR block; // for cycle
 ifStatement : IFKW LPAR expression RPAR block (elseBlock)?; // if-else
@@ -28,7 +53,6 @@ elseBlock : ELSEKW block; // else block
 array : LBRACE arrIndexList RBRACE; // array constant
 
 CMDEND : ';';
-QUERYKW : 'query';
 DATABASEKW : 'database';
 CLASSKW : 'class';
 RETURNKW : 'return';

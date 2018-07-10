@@ -40,6 +40,18 @@ public class SimpleDBGrammarBaseListener implements SimpleDBGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTypeId(SimpleDBGrammarParser.TypeIdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeId(SimpleDBGrammarParser.TypeIdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFieldDef(SimpleDBGrammarParser.FieldDefContext ctx) { }
 	/**
 	 * {@inheritDoc}

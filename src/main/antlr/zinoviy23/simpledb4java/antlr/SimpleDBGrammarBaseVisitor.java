@@ -31,6 +31,13 @@ public class SimpleDBGrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T> i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitTypeId(SimpleDBGrammarParser.TypeIdContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitFieldDef(SimpleDBGrammarParser.FieldDefContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
