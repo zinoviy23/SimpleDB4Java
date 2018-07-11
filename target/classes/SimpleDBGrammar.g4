@@ -8,28 +8,46 @@ public static final java.util.Set<String> classesSymbolTable = new java.util.Has
 // table for fields
 public static final java.util.Map<String, java.util.Map<String, String>> fieldsSymbolTable = new java.util.HashMap<>();
 
+// table for fields name with first lower case latter
+public static final java.util.Map<String, java.util.Set<String>> lowerCaseFieldsSymbolTable = new java.util.HashMap<>();
+
+public static String firstLatterToLowerCase(String str) {
+    return Character.toLowerCase(str.charAt(0)) + str.substring(1);
+}
+
 // class for methods
 public static class MethodInfo {
     public final String type;
 
     public final String name;
 
+    public final boolean isStatic;
+
     public final java.util.LinkedHashMap<String, String> arguments;
 
-    public MethodInfo(String type, String name, java.util.LinkedHashMap<String, String> arguments) {
+    public MethodInfo(String type, String name, boolean isStatic, java.util.LinkedHashMap<String, String> arguments) {
         this.name = name;
         this.type = type;
         this.arguments = arguments;
+        this.isStatic = isStatic;
     }
 
     @Override
     public String toString() {
-        return "{type=" + type + ", name=" + name + ", arguments=" + arguments +"}";
+        return "{type=" + type + ", name=" + name + ", isStatic=" + isStatic + ", arguments=" + arguments +"}";
     }
 }
 
 // table for methods
 public static final java.util.Map<String, java.util.Map<String, MethodInfo>> methodsSymbolTable = new java.util.HashMap<>();
+
+// clears tables
+public static void clearSymbolTables() {
+    classesSymbolTable.clear();
+    fieldsSymbolTable.clear();
+    lowerCaseFieldsSymbolTable.clear();
+    methodsSymbolTable.clear();
+}
 }
 
 file : fileHeader (classDef)*; // root node
@@ -38,12 +56,21 @@ typeId : ID(LSQBR RSQBR)?; // type inditificator
 fieldDef[String className] : typeId a=ID CMDEND
 {
 if (!fieldsSymbolTable.containsKey($className))
-    fieldsSymbolTable.put($className, new java.util.HashMap<>());
+    fieldsSymbolTable.put($className, new java.util.LinkedHashMap<>());
 if (fieldsSymbolTable.get($className).containsKey($a.text)) {
     throw new RuntimeException(String.format("Two fields with same inditificators (%s) in class %s. Line %d",
         $a.text, $className, $a.line));
 }
 fieldsSymbolTable.get($className).put($a.text, $typeId.text);
+
+if (!lowerCaseFieldsSymbolTable.containsKey($className))
+    lowerCaseFieldsSymbolTable.put($className, new java.util.LinkedHashSet<>());
+
+if (lowerCaseFieldsSymbolTable.get($className).contains(firstLatterToLowerCase($a.text))) {
+    throw new RuntimeException(String.format("Two fields with same inditificators with first latter in lower case (%s) in class %s. Line %d",
+            firstLatterToLowerCase($a.text), $className, $a.line));
+}
+lowerCaseFieldsSymbolTable.get($className).add(firstLatterToLowerCase($a.text));
 }; // field definition
 classDef : CLASSKW ID LBRACE (fieldDef[$ID.text]|queryDef[$ID.text])* RBRACE {classesSymbolTable.add($ID.text);}; // class definition
 dottedId : ID (LPAR callArgList RPAR)? (DOT ID (LPAR callArgList RPAR)?)*; // doted name like System.out.println
@@ -60,6 +87,8 @@ callArgList : | expression (COMMA expression)*; // call arguments
 simpleCommand : RETURNKW expression CMDEND | ID(LSQBR RSQBR)? ID '=' expression CMDEND | ID  ('='|'+='|'-=') expression CMDEND |
     dottedId CMDEND| forCycle | ifStatement; // simple command
 queryDef[String className] : typeId ID LPAR funcArgList RPAR (LEFTARROW expression CMDEND
+|
+    LBRACE simpleCommand* RBRACE)
 {
 java.util.LinkedHashMap<String, String> arguments = new java.util.LinkedHashMap<>();
 for (int i = 0; i < $funcArgList.ctx.ID().size(); i++) {
@@ -77,10 +106,8 @@ if (methodsSymbolTable.get($className).containsKey($ID.text))
     throw new RuntimeException(String.format("Two methods with same inditificators (%s) in class %s. Line %d",
                     $ID.text, $className, $ID.line));
 
-methodsSymbolTable.get($className).put($ID.text, new MethodInfo($typeId.text, $ID.text, arguments));
-}
-|
-    LBRACE simpleCommand* RBRACE); // definition of query method
+methodsSymbolTable.get($className).put($ID.text, new MethodInfo($typeId.text, $ID.text, true, arguments));
+}; // definition of query method
 funcArgList : | typeId ID (COMMA typeId ID)*; // arguments
 block :  simpleCommand | LBRACE (simpleCommand)* RBRACE; // block {}
 forCycle : FORKW LPAR ID(LSQBR RSQBR)? ID DOUBLEDOT expression RPAR block; // for cycle
