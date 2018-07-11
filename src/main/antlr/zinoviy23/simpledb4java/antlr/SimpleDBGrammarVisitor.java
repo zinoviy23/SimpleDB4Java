@@ -41,11 +41,35 @@ public interface SimpleDBGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitClassDef(SimpleDBGrammarParser.ClassDefContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#unaryExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnaryExpr(SimpleDBGrammarParser.UnaryExprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#incrExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIncrExpr(SimpleDBGrammarParser.IncrExprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#unaryPostExpr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnaryPostExpr(SimpleDBGrammarParser.UnaryPostExprContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#dottedId}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitDottedId(SimpleDBGrammarParser.DottedIdContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#arrayElementGetting}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayElementGetting(SimpleDBGrammarParser.ArrayElementGettingContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#expression}.
 	 * @param ctx the parse tree
@@ -58,6 +82,12 @@ public interface SimpleDBGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitArrIndexList(SimpleDBGrammarParser.ArrIndexListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#unaryOp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnaryOp(SimpleDBGrammarParser.UnaryOpContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#callArgList}.
 	 * @param ctx the parse tree
@@ -112,4 +142,10 @@ public interface SimpleDBGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitArray(SimpleDBGrammarParser.ArrayContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#constant}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConstant(SimpleDBGrammarParser.ConstantContext ctx);
 }

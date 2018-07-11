@@ -76,6 +76,42 @@ public class SimpleDBGrammarBaseListener implements SimpleDBGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterUnaryExpr(SimpleDBGrammarParser.UnaryExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnaryExpr(SimpleDBGrammarParser.UnaryExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIncrExpr(SimpleDBGrammarParser.IncrExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIncrExpr(SimpleDBGrammarParser.IncrExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUnaryPostExpr(SimpleDBGrammarParser.UnaryPostExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnaryPostExpr(SimpleDBGrammarParser.UnaryPostExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDottedId(SimpleDBGrammarParser.DottedIdContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -83,6 +119,18 @@ public class SimpleDBGrammarBaseListener implements SimpleDBGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDottedId(SimpleDBGrammarParser.DottedIdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArrayElementGetting(SimpleDBGrammarParser.ArrayElementGettingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArrayElementGetting(SimpleDBGrammarParser.ArrayElementGettingContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -107,6 +155,18 @@ public class SimpleDBGrammarBaseListener implements SimpleDBGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArrIndexList(SimpleDBGrammarParser.ArrIndexListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUnaryOp(SimpleDBGrammarParser.UnaryOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnaryOp(SimpleDBGrammarParser.UnaryOpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -215,6 +275,18 @@ public class SimpleDBGrammarBaseListener implements SimpleDBGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArray(SimpleDBGrammarParser.ArrayContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConstant(SimpleDBGrammarParser.ConstantContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConstant(SimpleDBGrammarParser.ConstantContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

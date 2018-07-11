@@ -1,6 +1,7 @@
 package zinoviy23.simpledb4java.parsing;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import zinoviy23.simpledb4java.antlr.SimpleDBGrammarBaseListener;
 import zinoviy23.simpledb4java.antlr.SimpleDBGrammarParser;
 import zinoviy23.simpledb4java.codegeneration.*;
@@ -22,6 +23,24 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
 
     private final static Set<String> simpleTypes = new HashSet<>(Arrays.asList("int", "long", "String", "float"));
 
+    private final static LinkedList<Map<String, String>> variables = new LinkedList<>();
+
+    /**
+     * Finds variable
+     * @param name variable name
+     * @return variable type or null
+     */
+    @Nullable
+    public static String findVariable(String name) {
+        ListIterator<Map<String, String>> it = variables.listIterator();
+        while (it.hasPrevious()) {
+            Map<String, String> map = it.previous();
+            if (map.containsKey(name))
+                return map.get(name);
+        }
+        return null;
+    }
+
     public SimpleDBGrammarListenerImpl(@NotNull LinkedList<GeneratedClass> generatedClasses) {
         this.generatedClasses = generatedClasses;
     }
@@ -35,20 +54,6 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
         addGettersSettersForFieldsToClassMethodsSymbolTable();
         addIdGetterAndField();
         addStandardClassMethods();
-
-        SimpleDBGrammarParser.classesSymbolTable.forEach(System.out::println);
-
-        SimpleDBGrammarParser.fieldsSymbolTable.forEach((key, value) -> {
-            System.out.print(key + " : ");
-            value.forEach((name, type) -> System.out.print(name + " " + type + "; "));
-            System.out.println();
-        });
-
-        SimpleDBGrammarParser.methodsSymbolTable.forEach((key, value) -> {
-            System.out.print(key + " : ");
-            value.forEach((name, type) -> System.out.print(name + " " + type + "; "));
-            System.out.println();
-        });
     }
 
     @Override
@@ -100,6 +105,15 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
 
     @Override
     public void enterQueryDef(SimpleDBGrammarParser.QueryDefContext ctx) {
+    }
+
+    @Override
+    public void enterExpression(SimpleDBGrammarParser.ExpressionContext ctx) {
+        try {
+            System.out.println(ctx.accept(new ExpressionTypeCheckingVisitor(generatedClasses.getLast().getName())));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     public List<GeneratedClass> getGeneratedClassesArray() {

@@ -73,18 +73,27 @@ if (lowerCaseFieldsSymbolTable.get($className).contains(firstLatterToLowerCase($
 lowerCaseFieldsSymbolTable.get($className).add(firstLatterToLowerCase($a.text));
 }; // field definition
 classDef : CLASSKW ID LBRACE (fieldDef[$ID.text]|queryDef[$ID.text])* RBRACE {classesSymbolTable.add($ID.text);}; // class definition
-dottedId : ID (LPAR callArgList RPAR)? (DOT ID (LPAR callArgList RPAR)?)*; // doted name like System.out.println
-expression : ('-'|'+'|'++'|'--') expression | // expression
-    expression LSQBR arrIndexList RSQBR |
-    expression ('++'|'--') |
-    expression ('*'|'/') expression |
-    expression ('+'|'-') expression |
-    expression ('<'|'>'|'<='|'>=') expression |
-    expression ('=='|'!=') expression | dottedId | CONSTANT | array |
+unaryExpr : unaryOp expression;
+incrExpr : (MINUSMINUS|PLUSPLUS) dottedId;
+unaryPostExpr: dottedId (PLUSPLUS|MINUSMINUS);
+dottedId : ID (LPAR callArgList RPAR)? (DOT dottedId)?; // doted name like System.out.println
+arrayElementGetting: (dottedId | array) LSQBR expression RSQBR;
+expression :  unaryExpr | // expression
+    arrayElementGetting |
+    unaryPostExpr |
+    incrExpr |
+    expression (MULT|DIV) expression |
+    expression (PLUS|MINUS) expression |
+    expression (LS|GR|LE|GE) expression |
+    expression (EQ|NOTEQ) expression |
+    expression AND expression | expression OR expression | dottedId  | constant | array  |
     LPAR expression RPAR;
-arrIndexList : expression (COMMA expression)*; // for arrays
+
+arrIndexList: expression (COMMA expression)*;
+unaryOp: (MINUS|PLUS);
 callArgList : | expression (COMMA expression)*; // call arguments
-simpleCommand : RETURNKW expression CMDEND | ID(LSQBR RSQBR)? ID '=' expression CMDEND | ID  ('='|'+='|'-=') expression CMDEND |
+simpleCommand : RETURNKW expression CMDEND | ID(LSQBR RSQBR)? ID ASSIGN expression CMDEND |
+    ID  (ASSIGN|PLUSASSIGN|MINUSASSIGM) expression CMDEND |
     dottedId CMDEND| forCycle | ifStatement; // simple command
 queryDef[String className] : typeId ID LPAR funcArgList RPAR (LEFTARROW expression CMDEND
 |
@@ -110,10 +119,11 @@ methodsSymbolTable.get($className).put($ID.text, new MethodInfo($typeId.text, $I
 }; // definition of query method
 funcArgList : | typeId ID (COMMA typeId ID)*; // arguments
 block :  simpleCommand | LBRACE (simpleCommand)* RBRACE; // block {}
-forCycle : FORKW LPAR ID(LSQBR RSQBR)? ID DOUBLEDOT expression RPAR block; // for cycle
+forCycle : FORKW LPAR typeId ID DOUBLEDOT expression RPAR block; // for cycle
 ifStatement : IFKW LPAR expression RPAR block (elseBlock)?; // if-else
 elseBlock : ELSEKW block; // else block
 array : LBRACE arrIndexList RBRACE; // array constant
+constant: (BOOLEAN | INT | FLOAT | STRING | NULL);
 
 CMDEND : ';';
 DATABASEKW : 'database';
@@ -129,17 +139,33 @@ RPAR : ')';
 LSQBR : '[';
 RSQBR : ']';
 DOT : '.';
+PLUS: '+';
+PLUSPLUS: '++';
+MINUS: '-';
+MINUSMINUS: '--';
+MULT: '*';
+DIV: '/';
+LS: '<';
+GR: '>';
+LE: '<=';
+GE: '>=';
+EQ: '==';
+NOTEQ: '!=';
+ASSIGN: '=';
+PLUSASSIGN: '+=';
+MINUSASSIGM: '-=';
+OR: '||';
+AND: '&&';
 COMMA : ',';
 DOUBLEDOT : ':';
 LEFTARROW: '->';
-CONSTANT : (INT|FLOAT|NULL|BOOLEAN|STRING);
+BOOLEAN : ('true'|'false');
+NULL : 'null';
+INT : ('+'|'-')?([1-9][0-9]*|'0');
+FLOAT : ('+'|'-')?([1-9][0-9]*|'0')?'.'[0-9]+;
+STRING : '"'~["\n\r]*'"';
 ID : [a-zA-Z_][a-zA-Z_0-9]*;
 SKIP_ : (WS | COMMENT) -> skip;
 
-fragment BOOLEAN : ('true'|'false');
-fragment NULL : 'null';
-fragment INT : ('+'|'-')?([1-9][0-9]*|'0');
-fragment FLOAT : ('+'|'-')?([1-9][0-9]*|'0')?'.'[0-9]+;
-fragment STRING : '"'~["\n\r]*'"';
 fragment COMMENT : '//'~[\r\n\f]*;
 fragment WS : [ \n\r\t]+;

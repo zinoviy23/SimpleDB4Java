@@ -58,6 +58,36 @@ public interface SimpleDBGrammarListener extends ParseTreeListener {
 	 */
 	void exitClassDef(SimpleDBGrammarParser.ClassDefContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#unaryExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryExpr(SimpleDBGrammarParser.UnaryExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleDBGrammarParser#unaryExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryExpr(SimpleDBGrammarParser.UnaryExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#incrExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterIncrExpr(SimpleDBGrammarParser.IncrExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleDBGrammarParser#incrExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitIncrExpr(SimpleDBGrammarParser.IncrExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#unaryPostExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryPostExpr(SimpleDBGrammarParser.UnaryPostExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleDBGrammarParser#unaryPostExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryPostExpr(SimpleDBGrammarParser.UnaryPostExprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#dottedId}.
 	 * @param ctx the parse tree
 	 */
@@ -67,6 +97,16 @@ public interface SimpleDBGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDottedId(SimpleDBGrammarParser.DottedIdContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#arrayElementGetting}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayElementGetting(SimpleDBGrammarParser.ArrayElementGettingContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleDBGrammarParser#arrayElementGetting}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayElementGetting(SimpleDBGrammarParser.ArrayElementGettingContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#expression}.
 	 * @param ctx the parse tree
@@ -87,6 +127,16 @@ public interface SimpleDBGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArrIndexList(SimpleDBGrammarParser.ArrIndexListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#unaryOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryOp(SimpleDBGrammarParser.UnaryOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleDBGrammarParser#unaryOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryOp(SimpleDBGrammarParser.UnaryOpContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#callArgList}.
 	 * @param ctx the parse tree
@@ -177,4 +227,14 @@ public interface SimpleDBGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArray(SimpleDBGrammarParser.ArrayContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#constant}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstant(SimpleDBGrammarParser.ConstantContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleDBGrammarParser#constant}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstant(SimpleDBGrammarParser.ConstantContext ctx);
 }
