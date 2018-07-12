@@ -20,7 +20,7 @@ public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<Ty
 
     @Override
     public TypeCheckingTreeResult visitExpression(SimpleDBGrammarParser.ExpressionContext ctx) {
-        System.out.println(ctx.getText() + " in expression");
+        //System.out.println(ctx.getText() + " in expression");
         if (ctx.constant() != null)
             return ctx.constant().accept(this);
 
@@ -154,7 +154,7 @@ public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<Ty
 
     @Override
     public TypeCheckingTreeResult visitArrIndexList(SimpleDBGrammarParser.ArrIndexListContext ctx) {
-        StringBuilder listSb = new StringBuilder("java.util.Arrays.asList(");
+        StringBuilder listSb = new StringBuilder();
 
         List<TypeCheckingTreeResult> elements = ctx.expression().stream()
                 .map(expressionContext -> expressionContext.accept(this)).collect(Collectors.toList());

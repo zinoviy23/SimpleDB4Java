@@ -89,6 +89,18 @@ public interface SimpleDBGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSimpleCommand(SimpleDBGrammarParser.SimpleCommandContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#blockCommand}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlockCommand(SimpleDBGrammarParser.BlockCommandContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#command}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCommand(SimpleDBGrammarParser.CommandContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#queryDef}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

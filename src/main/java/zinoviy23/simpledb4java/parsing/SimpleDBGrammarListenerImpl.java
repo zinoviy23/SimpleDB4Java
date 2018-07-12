@@ -32,13 +32,44 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
      */
     @Nullable
     public static String findVariable(String name) {
-        ListIterator<Map<String, String>> it = variables.listIterator();
+        ListIterator<Map<String, String>> it = variables.listIterator(variables.size());
         while (it.hasPrevious()) {
             Map<String, String> map = it.previous();
             if (map.containsKey(name))
                 return map.get(name);
         }
         return null;
+    }
+
+    /**
+     * Adds variable
+     * @param name variable name
+     * @param type variable type
+     */
+    public static void addVariable(String name, String type) {
+        if (findVariable(name) != null)
+            throw new RuntimeException(String.format("This variable already exists (%s)", name));
+
+        variables.getLast().put(name, type);
+    }
+
+    /**
+     * Deletes block variables
+     */
+    public static void popVariables() {
+        if (variables.size() != 0)
+            variables.pollLast();
+    }
+
+    /**
+     * Adds block
+     */
+    public static void addBlock() {
+        variables.add(new HashMap<>());
+    }
+
+    public static void clear() {
+        variables.clear();
     }
 
     public SimpleDBGrammarListenerImpl(@NotNull LinkedList<GeneratedClass> generatedClasses) {
@@ -101,6 +132,10 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
     public void exitClassDef(SimpleDBGrammarParser.ClassDefContext ctx) {
         DBInformation.getInstance().putTable(currentTable.getName(), currentTable);
         currentTable = null;
+    }
+
+    @Override
+    public void enterBlock(SimpleDBGrammarParser.BlockContext ctx) {
     }
 
     @Override

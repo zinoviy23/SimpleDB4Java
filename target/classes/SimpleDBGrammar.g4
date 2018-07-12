@@ -88,12 +88,14 @@ expression :  unaryExpr | // expression
 arrIndexList: expression (COMMA expression)*;
 unaryOp: (MINUS|PLUS);
 callArgList : | expression (COMMA expression)*; // call arguments
-simpleCommand : RETURNKW expression CMDEND | ID(LSQBR RSQBR)? ID ASSIGN expression CMDEND |
+simpleCommand : RETURNKW expression CMDEND | typeId ID ASSIGN expression CMDEND |
     ID  (ASSIGN|PLUSASSIGN|MINUSASSIGM) expression CMDEND |
-    dottedId CMDEND| forCycle | ifStatement; // simple command
+    dottedId CMDEND; // simple command
+blockCommand : forCycle | ifStatement;
+command: simpleCommand | blockCommand;
 queryDef[String className] : typeId ID LPAR funcArgList RPAR (LEFTARROW expression CMDEND
 |
-    LBRACE simpleCommand* RBRACE)
+    LBRACE command* RBRACE)
 {
 java.util.LinkedHashMap<String, String> arguments = new java.util.LinkedHashMap<>();
 for (int i = 0; i < $funcArgList.ctx.ID().size(); i++) {
@@ -114,7 +116,7 @@ if (methodsSymbolTable.get($className).containsKey($ID.text))
 methodsSymbolTable.get($className).put($ID.text, new MethodInfo($typeId.text, $ID.text, true, arguments));
 }; // definition of query method
 funcArgList : | typeId ID (COMMA typeId ID)*; // arguments
-block :  simpleCommand | LBRACE (simpleCommand)* RBRACE; // block {}
+block :  command | LBRACE (command)* RBRACE; // block {}
 forCycle : FORKW LPAR typeId ID DOUBLEDOT expression RPAR block; // for cycle
 ifStatement : IFKW LPAR expression RPAR block (elseBlock)?; // if-else
 elseBlock : ELSEKW block; // else block

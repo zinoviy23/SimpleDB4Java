@@ -46,7 +46,7 @@ public class DottedIdVisitor extends SimpleDBGrammarBaseVisitor<TypeCheckingTree
     @Override
     public TypeCheckingTreeResult visitDottedId(SimpleDBGrammarParser.DottedIdContext ctx) {
         String name = ctx.ID().getText();
-        String type;
+        String type = null;
         System.out.println("in " + name);
         // this is class name or field or variable
         if (ctx.LPAR() == null) {
@@ -56,12 +56,17 @@ public class DottedIdVisitor extends SimpleDBGrammarBaseVisitor<TypeCheckingTree
 
             StaticStatus currentStatus = StaticStatus.CAN_BE_STATIC;
 
-            type = SimpleDBGrammarListenerImpl.findVariable(name);
-            if (type == null)
+            boolean isField = true;
+            if (isFirst)
+                type = SimpleDBGrammarListenerImpl.findVariable(name);
+            if (type == null) {
                 if (SimpleDBGrammarParser.fieldsSymbolTable.get(currentClass).containsKey(name)) {
                     type = SimpleDBGrammarParser.fieldsSymbolTable.get(currentClass).get(name);
                     currentStatus = StaticStatus.CANT_BE_STATIC;
                 }
+            } else {
+                isField = false;
+            }
             if (isFirst && type == null) {
                 if (SimpleDBGrammarParser.classesSymbolTable.contains(name)) {
                     type = name;
@@ -75,11 +80,11 @@ public class DottedIdVisitor extends SimpleDBGrammarBaseVisitor<TypeCheckingTree
             if (ctx.dottedId() != null) {
                 TypeCheckingTreeResult result = ctx.dottedId().accept(new DottedIdVisitor(type, false, currentStatus));
                 return new TypeCheckingTreeResult(result.type, String.format("%s.%s",
-                        (currentStatus == StaticStatus.STATIC) ? name : "get" + Utils.getStringWithCapitalFirstChar(name) + "()",
+                        (currentStatus == StaticStatus.STATIC) ? name : ((isField) ? "get" + Utils.getStringWithCapitalFirstChar(name) + "()" : name),
                         result.value));
             } else {
                 return new TypeCheckingTreeResult(type, (currentStatus == StaticStatus.STATIC) ?
-                    name : "get" + Utils.getStringWithCapitalFirstChar(name) + "()");
+                    name : ((isField) ? "get" + Utils.getStringWithCapitalFirstChar(name) + "()" : name));
             }
         } else { // for functions
             SimpleDBGrammarParser.MethodInfo methodInfo = null;

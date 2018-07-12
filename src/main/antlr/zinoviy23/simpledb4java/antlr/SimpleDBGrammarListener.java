@@ -138,6 +138,26 @@ public interface SimpleDBGrammarListener extends ParseTreeListener {
 	 */
 	void exitSimpleCommand(SimpleDBGrammarParser.SimpleCommandContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#blockCommand}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlockCommand(SimpleDBGrammarParser.BlockCommandContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleDBGrammarParser#blockCommand}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlockCommand(SimpleDBGrammarParser.BlockCommandContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#command}.
+	 * @param ctx the parse tree
+	 */
+	void enterCommand(SimpleDBGrammarParser.CommandContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SimpleDBGrammarParser#command}.
+	 * @param ctx the parse tree
+	 */
+	void exitCommand(SimpleDBGrammarParser.CommandContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#queryDef}.
 	 * @param ctx the parse tree
 	 */
