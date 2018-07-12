@@ -191,7 +191,6 @@ public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<Ty
     @Nullable
     @Override
     public TypeCheckingTreeResult visitConstant(SimpleDBGrammarParser.ConstantContext ctx) {
-        System.out.println(ctx.getText() + " in constant ");
         if (ctx.BOOLEAN() != null)
             return new TypeCheckingTreeResult("boolean", ctx.getText());
         else if (ctx.FLOAT() != null)

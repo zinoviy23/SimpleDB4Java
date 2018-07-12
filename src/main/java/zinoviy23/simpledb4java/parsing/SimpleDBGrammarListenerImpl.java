@@ -140,16 +140,45 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
 
     @Override
     public void enterQueryDef(SimpleDBGrammarParser.QueryDefContext ctx) {
+        addBlock();
+        ctx.funcArgList().accept(new FuncArgListVisitor()).forEach(SimpleDBGrammarListenerImpl::addVariable);
+        GeneratedMethod generatedMethod;
+        if (ctx.LEFTARROW() != null) { // lambda
+            TypeCheckingTreeResult result = ctx.expression()
+                    .accept(new ExpressionTypeCheckingVisitor(generatedClasses.getLast().getName()));
+
+            TypeCheckingTreeResult.TypeCompareResult compareResult =
+                    TypeCheckingTreeResult.compareTypes(ctx.typeId().getText(), result.type);
+
+            if (compareResult == TypeCheckingTreeResult.TypeCompareResult.LESS ||
+                    compareResult == TypeCheckingTreeResult.TypeCompareResult.ERROR) {
+                throw new RuntimeException(String.format("Can't cast %s to %s", result.type, ctx.typeId().getText()));
+            }
+
+            generatedMethod = new GeneratedMethod(
+                    SimpleDBGrammarParser.methodsSymbolTable.get(generatedClasses.getLast().getName()).get(ctx.ID().getText()),
+                    String.format("{return %s;}", result.value)
+            );
+        } else { // block function
+            StringBuilder sb = new StringBuilder("{");
+            for (SimpleDBGrammarParser.CommandContext commandContext : ctx.command()) {
+                sb.append(commandContext.accept(new CommandParsingVisitor(
+                        generatedClasses.getLast().getName(),
+                        ctx.typeId().getText()))).append("\n");
+            }
+
+            sb.append("}");
+            generatedMethod = new GeneratedMethod(
+                    SimpleDBGrammarParser.methodsSymbolTable.get(generatedClasses.getLast().getName()).get(ctx.ID().getText()),
+                    sb.toString()
+            );
+        }
+
+        generatedClasses.getLast().addMethod(generatedMethod);
+
+        popVariables();
     }
 
-    @Override
-    public void enterExpression(SimpleDBGrammarParser.ExpressionContext ctx) {
-        try {
-            System.out.println(ctx.accept(new ExpressionTypeCheckingVisitor(generatedClasses.getLast().getName())));
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
 
     public List<GeneratedClass> getGeneratedClassesArray() {
         return Collections.unmodifiableList(generatedClasses);

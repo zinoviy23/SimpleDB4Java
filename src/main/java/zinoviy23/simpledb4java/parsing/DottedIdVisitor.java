@@ -47,7 +47,6 @@ public class DottedIdVisitor extends SimpleDBGrammarBaseVisitor<TypeCheckingTree
     public TypeCheckingTreeResult visitDottedId(SimpleDBGrammarParser.DottedIdContext ctx) {
         String name = ctx.ID().getText();
         String type = null;
-        System.out.println("in " + name);
         // this is class name or field or variable
         if (ctx.LPAR() == null) {
 
@@ -101,7 +100,6 @@ public class DottedIdVisitor extends SimpleDBGrammarBaseVisitor<TypeCheckingTree
                 throw new RuntimeException(String.format("%s is not static method", name));
 
             if (methodInfo.arguments != null) {
-                System.out.println("has args");
                 List<TypeCheckingTreeResult> args = ctx.callArgList().accept(new CallListArgsVisitor(currentClass));
 
                 if (methodInfo.arguments.size() == args.size()) {
@@ -130,7 +128,6 @@ public class DottedIdVisitor extends SimpleDBGrammarBaseVisitor<TypeCheckingTree
                     return new TypeCheckingTreeResult(methodInfo.type, String.format("%s(%s)", name, argsStr));
                 }
             } else {
-                System.out.println("hasn't args");
                 if (ctx.ID().getText().equals("min") || ctx.ID().getText().equals("max")) {
                     if (ctx.dottedId() != null) {
                         TypeCheckingTreeResult result = ctx.dottedId().accept(new DottedIdVisitor(methodInfo.type, false,

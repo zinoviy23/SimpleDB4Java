@@ -14,6 +14,11 @@ public class GeneratedClass {
     private List<GeneratedField> generatedFields = new ArrayList<>();
 
     /**
+     * List of generated methods
+     */
+    private List<GeneratedMethod> generatedMethods = new ArrayList<>();
+
+    /**
      * Class name
      */
     private final String name;
@@ -48,6 +53,15 @@ public class GeneratedClass {
      */
     public boolean addField(GeneratedField field) {
         return generatedFields.add(field);
+    }
+
+    /**
+     * Adds method to class
+     * @param generatedMethod generated method
+     * @return result of adding
+     */
+    public boolean addMethod(GeneratedMethod generatedMethod) {
+        return generatedMethods.add(generatedMethod);
     }
 
     /**
@@ -91,6 +105,10 @@ public class GeneratedClass {
                 .append("public class ").append(name).append(" {\n").append(genereatedIdCode);
         for (GeneratedField field : generatedFields) {
             sb.append(field.getGeneratedCode());
+        }
+
+        for (GeneratedMethod method : generatedMethods) {
+            sb.append(method.getGeneratedCode());
         }
 
         sb.append(getAllMethod()).append(getGetByIdMethod()).append(getMinMaxMethods()).append(getFindMethods())

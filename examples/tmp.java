@@ -6,11 +6,7 @@ class User {
 	Animal[] animals;
 	
 	User getMaxAgeUser() -> User.max(age, -id);
-	int getMinAgeUserId() -> User.min(age).id;
-
-	int lol(int i) -> 3 + 5;
-	int tmp() -> lol(2) == 3;
-	Animal[] ssss() -> animals[3];
+	long getMinAgeUserId() -> User.min(age).id;
 }
 
 class Animal {
@@ -19,7 +15,7 @@ class Animal {
 	String type;
 	User user;
 	
-	Animal getByUser(User usr) -> Animal.find(user == 1);
+	Animal getByUser(User usr) -> Animal.find(user == usr);
 }
 
 class Purchase {
@@ -27,15 +23,15 @@ class Purchase {
 	User user;
 	String product;
 
-	float getUserPurchasesAmount(User user) {
+	float getUserPurchasesAmount(User usr) {
 		float sum = 0;
-		Purchase[] ps = Purchase.findAll(user == user);
+		float[] arr = {1, 1.0};
+		float i = arr[1];
+		Purchase[] ps = Purchase.findAll(usr == user);
 		for (Purchase p : ps)
 			if (p.amount > 0)
 			    sum += p.amount;
 		return sum;
-		int[] arr = {1, 1.0};
-		int i = arr[1];
 	}
 
 	float kek(int a, int b, int c) -> (-1);

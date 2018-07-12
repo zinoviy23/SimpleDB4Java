@@ -58,10 +58,10 @@ public class Main {
 
             //DBInformation.getInstance().createDBSQLite("jdbc:sqlite:/home/sanusha/Proga/SimpleDB4Java",
                    // "org.sqlite.JDBC");
-            /*for (GeneratedClass cl: classes) {
+            for (GeneratedClass cl: classes) {
                 System.out.println(cl.getGenereatedCode());
                 System.out.println(cl);
-            }*/
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
