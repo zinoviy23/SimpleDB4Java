@@ -74,14 +74,10 @@ lowerCaseFieldsSymbolTable.get($className).add(firstLatterToLowerCase($a.text));
 }; // field definition
 classDef : CLASSKW ID LBRACE (fieldDef[$ID.text]|queryDef[$ID.text])* RBRACE {classesSymbolTable.add($ID.text);}; // class definition
 unaryExpr : unaryOp expression;
-incrExpr : (MINUSMINUS|PLUSPLUS) dottedId;
-unaryPostExpr: dottedId (PLUSPLUS|MINUSMINUS);
 dottedId : ID (LPAR callArgList RPAR)? (DOT dottedId)?; // doted name like System.out.println
 arrayElementGetting: (dottedId | array) LSQBR expression RSQBR;
 expression :  unaryExpr | // expression
     arrayElementGetting |
-    unaryPostExpr |
-    incrExpr |
     expression (MULT|DIV) expression |
     expression (PLUS|MINUS) expression |
     expression (LS|GR|LE|GE) expression |

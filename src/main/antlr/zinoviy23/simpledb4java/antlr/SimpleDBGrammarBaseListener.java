@@ -88,30 +88,6 @@ public class SimpleDBGrammarBaseListener implements SimpleDBGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIncrExpr(SimpleDBGrammarParser.IncrExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIncrExpr(SimpleDBGrammarParser.IncrExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterUnaryPostExpr(SimpleDBGrammarParser.UnaryPostExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitUnaryPostExpr(SimpleDBGrammarParser.UnaryPostExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterDottedId(SimpleDBGrammarParser.DottedIdContext ctx) { }
 	/**
 	 * {@inheritDoc}

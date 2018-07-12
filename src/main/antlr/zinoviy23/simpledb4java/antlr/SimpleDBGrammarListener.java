@@ -68,26 +68,6 @@ public interface SimpleDBGrammarListener extends ParseTreeListener {
 	 */
 	void exitUnaryExpr(SimpleDBGrammarParser.UnaryExprContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#incrExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIncrExpr(SimpleDBGrammarParser.IncrExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SimpleDBGrammarParser#incrExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIncrExpr(SimpleDBGrammarParser.IncrExprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#unaryPostExpr}.
-	 * @param ctx the parse tree
-	 */
-	void enterUnaryPostExpr(SimpleDBGrammarParser.UnaryPostExprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SimpleDBGrammarParser#unaryPostExpr}.
-	 * @param ctx the parse tree
-	 */
-	void exitUnaryPostExpr(SimpleDBGrammarParser.UnaryPostExprContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link SimpleDBGrammarParser#dottedId}.
 	 * @param ctx the parse tree
 	 */

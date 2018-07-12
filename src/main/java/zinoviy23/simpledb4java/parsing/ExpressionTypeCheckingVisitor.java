@@ -7,6 +7,9 @@ import zinoviy23.simpledb4java.antlr.SimpleDBGrammarParser;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class for expression
+ */
 public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<TypeCheckingTreeResult> {
     private final String currentClass;
 
@@ -46,7 +49,107 @@ public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<Ty
             return ctx.dottedId().accept(new DottedIdVisitor(currentClass, true, DottedIdVisitor.StaticStatus.CAN_BE_STATIC));
         }
 
+        if (ctx.arrayElementGetting() != null) {
+            return ctx.arrayElementGetting().accept(this);
+        }
+
+        if (ctx.MULT() != null) {
+            return getForOperators("*", ctx);
+        }
+
+        if (ctx.DIV() != null) {
+            return getForOperators("/", ctx);
+        }
+
+        if (ctx.MINUS() != null) {
+            return getForOperators("-", ctx);
+        }
+
+        if (ctx.PLUS() != null) {
+            TypeCheckingTreeResult result1 = ctx.expression(0).accept(this);
+            TypeCheckingTreeResult result2 = ctx.expression(1).accept(this);
+
+            if (result1.type.equals("String") || result2.type.equals("String"))
+                return new TypeCheckingTreeResult("String", String.format("%s + %s", result1.value, result2.value));
+
+            if (!result1.type.equals("float") && !result1.type.equals("long") && !result1.type.equals("int")) {
+                throw new RuntimeException(String.format("Operator + allows only numeric types. Actual %s", result1.type));
+            }
+
+            if (!result2.type.equals("float") && !result2.type.equals("long") && !result2.type.equals("int")) {
+                throw new RuntimeException(String.format("Operator + allows only numeric types. Actual %s", result1.type));
+            }
+
+            TypeCheckingTreeResult.TypeCompareResult typeCompareResult =
+                    TypeCheckingTreeResult.compareTypes(result1.type, result2.type);
+
+            if (typeCompareResult == TypeCheckingTreeResult.TypeCompareResult.ERROR) {
+                throw new RuntimeException(String.format("Bad types for +. Actual %s %s", result1.type, result2.type));
+            }
+
+            String resType =
+                    (typeCompareResult == TypeCheckingTreeResult.TypeCompareResult.LESS ||
+                            typeCompareResult == TypeCheckingTreeResult.TypeCompareResult.EQ) ? result2.type : result1.type;
+
+            return new TypeCheckingTreeResult(resType, String.format("%s + %s", result1.value, result2.value));
+        }
+
+        if (ctx.LE() != null) {
+            return getForCompOperators("<=", ctx);
+        }
+
+        if (ctx.GE() != null) {
+            return getForCompOperators(">=", ctx);
+        }
+
+        if (ctx.LS() != null) {
+            return getForCompOperators("<", ctx);
+        }
+
+        if (ctx.GR() != null) {
+            return getForCompOperators(">", ctx);
+        }
+
+        if (ctx.EQ() != null) {
+            return getForCompOperators("==", ctx);
+        }
+
+        if (ctx.NOTEQ() != null) {
+            return getForCompOperators("!=", ctx);
+        }
+
         return null;
+    }
+
+    private TypeCheckingTreeResult getForOperators(String operator, SimpleDBGrammarParser.ExpressionContext ctx) {
+        TypeCheckingTreeResult result1 = ctx.expression(0).accept(this);
+        TypeCheckingTreeResult result2 = ctx.expression(1).accept(this);
+
+        if (!result1.type.equals("float") && !result1.type.equals("long") && !result1.type.equals("int")) {
+            throw new RuntimeException(String.format("Operator %s allows only numeric types. Actual %s", operator, result1.type));
+        }
+
+        if (!result2.type.equals("float") && !result2.type.equals("long") && !result2.type.equals("int")) {
+            throw new RuntimeException(String.format("Operator %s allows only numeric types. Actual %s", operator, result1.type));
+        }
+
+        TypeCheckingTreeResult.TypeCompareResult typeCompareResult =
+                TypeCheckingTreeResult.compareTypes(result1.type, result2.type);
+
+        if (typeCompareResult == TypeCheckingTreeResult.TypeCompareResult.ERROR) {
+            throw new RuntimeException(String.format("Bad types for %s. Actual %s %s", operator,result1.type, result2.type));
+        }
+
+        String resType =
+                (typeCompareResult == TypeCheckingTreeResult.TypeCompareResult.LESS ||
+                        typeCompareResult == TypeCheckingTreeResult.TypeCompareResult.EQ) ? result2.type : result1.type;
+
+        return new TypeCheckingTreeResult(resType, String.format("%s %s %s",result1.value, operator, result2.value));
+    }
+
+    private TypeCheckingTreeResult getForCompOperators(String operator, SimpleDBGrammarParser.ExpressionContext ctx) {
+        TypeCheckingTreeResult result = getForOperators(operator, ctx);
+        return new TypeCheckingTreeResult("boolean", result.value);
     }
 
     @Override
@@ -114,7 +217,30 @@ public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<Ty
         throw new RuntimeException("Unknown constant type");
     }
 
+    @Override
+    public TypeCheckingTreeResult visitArrayElementGetting(SimpleDBGrammarParser.ArrayElementGettingContext ctx) {
+        TypeCheckingTreeResult result = ctx.expression().accept(this);
 
+        if (!result.type.equals("int"))
+            throw new RuntimeException(String.format("Array index must be int. In expression %s", ctx.getText()));
 
+        if (ctx.array() != null) {
+            TypeCheckingTreeResult arrayResult = ctx.array().accept(this);
+            return new TypeCheckingTreeResult(arrayResult.type.replace("[]", ""),
+                    String.format("%s.get(%s)", arrayResult.value, result.value));
+        }
 
+        if (ctx.dottedId() != null) {
+            TypeCheckingTreeResult idResult = ctx.dottedId().accept(new DottedIdVisitor(currentClass, true,
+                    DottedIdVisitor.StaticStatus.CAN_BE_STATIC));
+
+            if (!idResult.type.contains("[]"))
+                throw new RuntimeException(String.format("[] can be applied only to arrays. But actual type is %s. In expression %s"
+                        , idResult.type, ctx.getText()));
+
+            return new TypeCheckingTreeResult(idResult.type.replace("[]", ""),
+                    String.format("%s.get(%s)", idResult.value, result.value));
+        }
+        return null;
+    }
 }

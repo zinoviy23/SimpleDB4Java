@@ -47,18 +47,6 @@ public interface SimpleDBGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUnaryExpr(SimpleDBGrammarParser.UnaryExprContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#incrExpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIncrExpr(SimpleDBGrammarParser.IncrExprContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#unaryPostExpr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUnaryPostExpr(SimpleDBGrammarParser.UnaryPostExprContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link SimpleDBGrammarParser#dottedId}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

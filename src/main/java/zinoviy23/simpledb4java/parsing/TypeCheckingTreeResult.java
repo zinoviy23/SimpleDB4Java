@@ -1,5 +1,8 @@
 package zinoviy23.simpledb4java.parsing;
 
+/**
+ * Class for creating code and type checking
+ */
 public class TypeCheckingTreeResult {
     public final String type;
 
