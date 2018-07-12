@@ -28,7 +28,8 @@ public class CommandParsingVisitor extends SimpleDBGrammarBaseVisitor<String> {
 
             if (compareResult == TypeCheckingTreeResult.TypeCompareResult.ERROR ||
                     compareResult == TypeCheckingTreeResult.TypeCompareResult.LESS)
-                throw new RuntimeException(String.format("Can't cast %s to %s", result.type, currentMethodType));
+                throw new RuntimeException(String.format("Can't cast %s to %s. In line %s", result.type, currentMethodType,
+                        ctx.getStart().getLine()));
 
             return String.format("return %s;", result.value);
         }
@@ -41,7 +42,8 @@ public class CommandParsingVisitor extends SimpleDBGrammarBaseVisitor<String> {
 
             if (compareResult == TypeCheckingTreeResult.TypeCompareResult.LESS ||
                     compareResult == TypeCheckingTreeResult.TypeCompareResult.ERROR)
-                throw new RuntimeException(String.format("Can't cast %s to %s", result.type, ctx.typeId().getText()));
+                throw new RuntimeException(String.format("Can't cast %s to %s. In line %s", result.type, ctx.typeId().getText(),
+                        ctx.getStart().getLine()));
 
             SimpleDBGrammarListenerImpl.addVariable(ctx.ID().getText(), ctx.typeId().getText());
 
@@ -58,7 +60,7 @@ public class CommandParsingVisitor extends SimpleDBGrammarBaseVisitor<String> {
 
             if (type == null) {
                 if (!SimpleDBGrammarParser.fieldsSymbolTable.get(currentClass).containsKey(name)) {
-                    throw new RuntimeException(String.format("Unknown %s", name));
+                    throw new RuntimeException(String.format("Unknown %s in line %s", name, ctx.getStart().getLine()));
                 }
 
                 type = SimpleDBGrammarParser.fieldsSymbolTable.get(currentClass).get(name);
@@ -70,17 +72,20 @@ public class CommandParsingVisitor extends SimpleDBGrammarBaseVisitor<String> {
             if (ctx.ASSIGN() != null) {
                 if (compareResult == TypeCheckingTreeResult.TypeCompareResult.LESS ||
                         compareResult == TypeCheckingTreeResult.TypeCompareResult.ERROR)
-                    throw new RuntimeException(String.format("Can't cast %s to %s", result.type, type));
+                    throw new RuntimeException(String.format("Can't cast %s to %s in line %s", result.type, type,
+                            ctx.getStart().getLine()));
 
                 return String.format("%s = %s;", name, result.value);
             }
 
             if (!type.equals("int") && !type.equals("long") && !type.equals("float"))
-                throw new RuntimeException(String.format("+=/-= allows only num type, but given %s", type));
+                throw new RuntimeException(String.format("+=/-= allows only num type, but given %s. in line %s", type,
+                        ctx.getStart().getLine()));
 
             if (compareResult == TypeCheckingTreeResult.TypeCompareResult.LESS ||
                     compareResult == TypeCheckingTreeResult.TypeCompareResult.ERROR)
-                throw new RuntimeException(String.format("Can't cast %s to %s", result.type, type));
+                throw new RuntimeException(String.format("Can't cast %s to %s. In line %s", result.type, type,
+                        ctx.getStart().getLine()));
 
             if (ctx.MINUSASSIGM() != null) {
                 return String.format("%s -= %s;", name, result.value);
@@ -93,9 +98,10 @@ public class CommandParsingVisitor extends SimpleDBGrammarBaseVisitor<String> {
 
         if (ctx.dottedId() != null) {
             TypeCheckingTreeResult result =
-                    ctx.dottedId().accept(new DottedIdVisitor(currentClass, true, DottedIdVisitor.StaticStatus.CAN_BE_STATIC));
+                    ctx.dottedId().accept(new DottedIdVisitor(currentClass, true, DottedIdVisitor.StaticStatus.STATIC));
             if (!result.value.endsWith(")"))
-                throw new RuntimeException(String.format("Must be method call! But %s", ctx.dottedId().getText()));
+                throw new RuntimeException(String.format("Must be method call! But %s. In line %s", ctx.dottedId().getText(),
+                        ctx.getStart().getLine()));
 
             return result.value + ";";
         }
@@ -108,14 +114,15 @@ public class CommandParsingVisitor extends SimpleDBGrammarBaseVisitor<String> {
         TypeCheckingTreeResult result = ctx.expression().accept(new ExpressionTypeCheckingVisitor(currentClass));
 
         if (!result.type.endsWith("[]"))
-            throw new RuntimeException("For needs array, but given " + result.type);
+            throw new RuntimeException("For needs array, but given " + result.type + "In line " + ctx.getStart().getLine());
 
         String type = result.type.replace("[]", "");
 
         TypeCheckingTreeResult.TypeCompareResult compareResult = TypeCheckingTreeResult.compareTypes(type, ctx.typeId().getText());
         if (compareResult == TypeCheckingTreeResult.TypeCompareResult.LESS ||
                 compareResult == TypeCheckingTreeResult.TypeCompareResult.ERROR)
-            throw new RuntimeException(String.format("Can't cast %s to %s", result.type, ctx.typeId().getText()));
+            throw new RuntimeException(String.format("Can't cast %s to %s. In line %s", result.type, ctx.typeId().getText(),
+                    ctx.getStart().getLine()));
 
         SimpleDBGrammarListenerImpl.addBlock();
         SimpleDBGrammarListenerImpl.addVariable(ctx.ID().getText(), ctx.typeId().getText());
@@ -129,7 +136,7 @@ public class CommandParsingVisitor extends SimpleDBGrammarBaseVisitor<String> {
         TypeCheckingTreeResult result = ctx.expression().accept(new ExpressionTypeCheckingVisitor(currentClass));
 
         if (!result.type.equals("boolean")) {
-            throw new RuntimeException("if statement must be boolean");
+            throw new RuntimeException("if statement must be boolean. In line " + ctx.getStart().getLine());
         }
 
         String blockCode = ctx.block().accept(this);

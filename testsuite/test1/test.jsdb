@@ -1,0 +1,6 @@
+database MyDB;
+
+class User {
+    int age;
+    String name;
+}

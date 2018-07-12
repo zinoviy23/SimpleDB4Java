@@ -11,6 +11,7 @@ import zinoviy23.simpledb4java.codegeneration.GeneratedClass;
 import zinoviy23.simpledb4java.dbinfo.DBInformation;
 import zinoviy23.simpledb4java.parsing.SimpleDBGrammarListenerImpl;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.BitSet;
 import java.util.LinkedList;
@@ -25,7 +26,12 @@ public class Main {
      */
     public static void main(String[] args) {
         try {
-            SimpleDBGrammarLexer lexer = new SimpleDBGrammarLexer(CharStreams.fromFileName("examples/tmp.java"));
+            if (args.length < 1)
+                throw new RuntimeException("Needs path to file!");
+
+            String fileName = System.getProperty("user.dir") +"/" + args[0];
+
+            SimpleDBGrammarLexer lexer = new SimpleDBGrammarLexer(CharStreams.fromFileName(fileName));
             CommonTokenStream tokenStream = new CommonTokenStream(lexer);
             SimpleDBGrammarParser parser = new SimpleDBGrammarParser(tokenStream);
 
@@ -56,13 +62,44 @@ public class Main {
             LinkedList<GeneratedClass> classes = new LinkedList<>();
             walker.walk(new SimpleDBGrammarListenerImpl(classes), syntaxTree);
 
-            //DBInformation.getInstance().createDBSQLite("jdbc:sqlite:/home/sanusha/Proga/SimpleDB4Java",
-                   // "org.sqlite.JDBC");
-            for (GeneratedClass cl: classes) {
-                System.out.println(cl.getGenereatedCode());
-                System.out.println(cl);
+            String pathToDB = System.getProperty("user.dir") + "/" + DBInformation.getInstance().getDbName();
+            FileUtils.createDirectory("db");
+            String dbPath = System.getProperty("user.dir") + "/db/";
+
+            File mainPath;
+            if (args.length <= 1 || !args[1].equals("-in-idea")) {
+                mainPath = new File(System.getProperty("java.class.path")).getAbsoluteFile().getParentFile();
+                FileUtils.copyFiles(  mainPath.getAbsolutePath() + "/res/Executor.java",
+                        dbPath + "Executor.java");
+                FileUtils.copyFiles( mainPath.getAbsolutePath() + "/res/ResultHandler.java",
+                        dbPath + "ResultHandler.java");
+                FileUtils.copyFormat(mainPath.getAbsolutePath() + "/res/DBService.java",
+                        dbPath + "DBService.java", pathToDB);
+
+
+
+                if (args.length <= 1 || !args[1].equals("-no-db")) {
+                    FileUtils.copyFiles(  mainPath.getAbsolutePath() + "/res/sqlite-jdbc-3.23.1.jar",
+                            System.getProperty("user.dir") + "/sqlite-jdbc-3.23.1.jar");
+
+                    DBInformation.getInstance().createDBSQLite("jdbc:sqlite:" + System.getProperty("user.dir"), "org.sqlite.JDBC");
+                }
+
+            } else {
+                FileUtils.copyFiles(  "res/Executor.java", dbPath + "Executor.java");
+                FileUtils.copyFiles( "res/ResultHandler.java",
+                        dbPath + "ResultHandler.java");
+                FileUtils.copyFormat("res/DBService.java", dbPath + "DBService.java", pathToDB);
             }
-        } catch (IOException e) {
+
+            for (GeneratedClass cl: classes) {
+                FileUtils.writeToFile(dbPath + cl.getName() + ".java", cl.getGenereatedCode());
+            }
+        } catch (IOException | RuntimeException e) {
+            System.err.println("Error!");
+            if (e.getMessage() != null)
+                System.err.println(e.getMessage());
+        } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

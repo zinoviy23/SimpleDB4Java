@@ -1,0 +1,47 @@
+database MyDB;
+
+class User {
+    String name;
+
+    Purchase[] purchases;
+
+    float totalBalance(User user) {
+        float pos = 0;
+        float neg = 0;
+        for (Purchase p : user.purchases)
+            if (p.amount > 0)
+                pos += p.amount;
+            else
+                neg -= p.amount;
+        return pos - neg;
+    }
+
+    float totalPos(User user) {
+        float sum = 0;
+
+        for (Purchase p : user.purchases)
+            if (p.amount > 0)
+                sum += p.amount;
+
+        return sum;
+    }
+
+    float totalNeg(User user) {
+        float sum = 0;
+
+        for (Purchase p : user.purchases)
+        if (p.amount < 0)
+            sum += p.amount;
+
+        return sum;
+    }
+
+    float totalBalance1(User user) -> totalPos(user) + totalNeg(user);
+}
+
+class Purchase {
+    float amount;
+
+    User user;
+}
+

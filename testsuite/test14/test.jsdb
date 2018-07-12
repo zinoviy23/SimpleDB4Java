@@ -1,0 +1,31 @@
+database MyDB;
+
+class User {
+    String nickName;
+
+    Forum[] forums;
+
+    String getAllUserMessagesToString(User usr) {
+         String res = "";
+
+         for (Forum f : usr.forums)
+            for (Message m : Message.findAll(user == usr && forum == f))
+                res = res +  m.message;
+         return res;
+    }
+}
+
+class Forum {
+    String name;
+
+    Message[] messages;
+}
+
+class Message {
+    User user;
+
+    Forum forum;
+
+    String message;
+}
+

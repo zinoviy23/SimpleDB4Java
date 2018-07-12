@@ -152,7 +152,8 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
 
             if (compareResult == TypeCheckingTreeResult.TypeCompareResult.LESS ||
                     compareResult == TypeCheckingTreeResult.TypeCompareResult.ERROR) {
-                throw new RuntimeException(String.format("Can't cast %s to %s", result.type, ctx.typeId().getText()));
+                throw new RuntimeException(String.format("Can't cast %s to %s. In line %s", result.type,
+                        ctx.typeId().getText(), ctx.getStart().getLine()));
             }
 
             generatedMethod = new GeneratedMethod(
@@ -220,8 +221,9 @@ public class SimpleDBGrammarListenerImpl extends SimpleDBGrammarBaseListener {
                         SimpleDBGrammarParser.methodsSymbolTable.put(className, new HashMap<>());
 
                     if (SimpleDBGrammarParser.methodsSymbolTable.get(className).containsKey(methodInfo.name))
-                        throw new RuntimeException(String.format("Methods with to same indentificators (%s) in class %s",
-                                methodInfo.name, className));
+                        throw new RuntimeException(
+                                String.format("Methods with to same indentificators (%s) in class %s",
+                                        methodInfo.name, className));
 
                     SimpleDBGrammarParser.methodsSymbolTable.get(className).put(methodInfo.name, methodInfo);
                 }

@@ -20,15 +20,15 @@ public class CallArgListForMinMaxVisitor extends SimpleDBGrammarBaseVisitor<Stri
     @Override
     public String visitCallArgList(SimpleDBGrammarParser.CallArgListContext ctx) {
         if (ctx.expression().size() == 0) {
-            throw new RuntimeException(String.format("Error! Method needs at least one argument. In class %s", className));
+            throw new RuntimeException(String.format("Error! Method needs at least one argument. In class %s. line %s", className, ctx.getStart().getLine()));
         }
 
         List<String> args = ctx.expression().stream()
                 .map(expressionContext -> expressionContext.accept(this))
                 .collect(Collectors.toList());
 
-        return String.format("java.util.Comparator.comparing(kekekekek->%s)",
-                String.join(").thenComparing(kekekekek->", args));
+        return String.format("java.util.Comparator.comparing((%s kekekekek)->%s)",
+                className ,String.join(String.format(").thenComparing((%s kekekekek)->", className), args));
     }
 
     @Override
@@ -39,7 +39,8 @@ public class CallArgListForMinMaxVisitor extends SimpleDBGrammarBaseVisitor<Stri
         if (ctx.unaryExpr() != null) {
             return ctx.unaryExpr().accept(this);
         }
-        throw new RuntimeException(String.format("This method allows only field names. In class %s", className));
+        throw new RuntimeException(String.format("This method allows only field names. In class %s. In line %s", className,
+                ctx.getStart().getLine()));
     }
 
     @Override
@@ -50,16 +51,19 @@ public class CallArgListForMinMaxVisitor extends SimpleDBGrammarBaseVisitor<Stri
     @Override
     public String visitDottedId(SimpleDBGrammarParser.DottedIdContext ctx) {
         if (ctx.LPAR() != null || ctx.DOT() != null) {
-            throw new RuntimeException(String.format("This method allows only field names. In class %s", className));
+            throw new RuntimeException(String.format("This method allows only field names. In class %s. In line %s",
+                    className, ctx.getStart().getLine()));
         }
 
         if (!SimpleDBGrammarParser.fieldsSymbolTable.get(className).containsKey(ctx.getText()))
-            throw new RuntimeException(String.format("Unknown field id (%s). In class %s", ctx.getText() ,className));
+            throw new RuntimeException(String.format("Unknown field id (%s). In class %s. In line %s",
+                    ctx.getText() ,className, ctx.getStart().getLine()));
 
         String type = SimpleDBGrammarParser.fieldsSymbolTable.get(className).get(ctx.getText());
 
         if (!type.equals("int") && !type.equals("float") && !type.equals("String") && !type.equals("long"))
-            throw new RuntimeException(String.format("Type %s is not comparable", className));
+            throw new RuntimeException(String.format("Type %s is not comparable. In line %s", className,
+                    ctx.getStart().getLine()));
 
         return ctx.getText();
     }

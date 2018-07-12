@@ -1,0 +1,22 @@
+database MyDB;
+
+class User {
+    String name;
+
+    Purchase[] purchases;
+
+    float totalCost(User user) {
+        float sum = 0;
+        for (Purchase p : user.purchases) {
+            sum += p.amount;
+        }
+        return sum;
+    }
+}
+
+class Purchase {
+    float amount;
+
+    User user;
+}
+

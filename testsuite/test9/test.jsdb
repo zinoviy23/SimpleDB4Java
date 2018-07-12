@@ -1,0 +1,12 @@
+database MyDB;
+
+class User {
+    int age;
+    String name;
+
+    float height;
+
+    //String[] badNames() -> {1, "Keklion", "Dondik"};
+
+    float[] heightRecords() -> {2.3, 2, 1.9};
+}

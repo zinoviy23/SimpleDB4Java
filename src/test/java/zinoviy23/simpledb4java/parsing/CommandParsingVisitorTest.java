@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.After;
 import org.junit.Test;
 import zinoviy23.simpledb4java.antlr.SimpleDBGrammarLexer;
+import zinoviy23.simpledb4java.antlr.SimpleDBGrammarListener;
 import zinoviy23.simpledb4java.antlr.SimpleDBGrammarParser;
 
 import java.util.HashMap;
@@ -20,9 +21,9 @@ public class CommandParsingVisitorTest {
     public void visitSimpleCommand() {
         SimpleDBGrammarLexer lexer = new SimpleDBGrammarLexer(
                 CharStreams.fromString(
-                        "database MyDB; class A{int age; float height; String name; int b() {int i = 0; i += 2; float c = 0.0;" +
+                        "database MyDB; class A{int age; float height; String name; int b(A a) {int i = 0; i += 2; float c = 0.0;" +
                                 "c -= 3;" +
-                                "getAge(); return 10;} }" +
+                                "a.getAge(); return 10;} }" +
                         " class B{A[] as; int b;}"));
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
         SimpleDBGrammarParser parser = new SimpleDBGrammarParser(tokenStream);
@@ -48,7 +49,7 @@ public class CommandParsingVisitorTest {
         res =((SimpleDBGrammarParser.QueryDefContext) syntaxTree).command(2).simpleCommand()
                 .accept(new CommandParsingVisitor("A", "int"));
 
-        assertEquals("float c = 0.0;", res);
+        assertEquals("float c = 0.0f;", res);
 
         res = ((SimpleDBGrammarParser.QueryDefContext) syntaxTree).command(3).simpleCommand()
                 .accept(new CommandParsingVisitor("A", "int"));
@@ -58,13 +59,14 @@ public class CommandParsingVisitorTest {
         SimpleDBGrammarParser.methodsSymbolTable.put("A", new HashMap<>());
         SimpleDBGrammarParser.methodsSymbolTable.get("A").put("getAge",
                 new SimpleDBGrammarParser.MethodInfo("int", "getAge", false, new LinkedHashMap<>()));
+        SimpleDBGrammarListenerImpl.addVariable("a", "A");
 
         assertTrue(SimpleDBGrammarParser.methodsSymbolTable.get("A").containsKey("getAge"));
 
         res = ((SimpleDBGrammarParser.QueryDefContext) syntaxTree).command(4).simpleCommand()
                 .accept(new CommandParsingVisitor("A", "int"));
 
-        assertEquals("getAge();", res);
+        assertEquals("a.getAge();", res);
     }
 
     @After
@@ -90,7 +92,7 @@ public class CommandParsingVisitorTest {
         String res = ((SimpleDBGrammarParser.QueryDefContext) syntaxTree).command(0)
                 .accept(new CommandParsingVisitor("A", "int"));
 
-        assertEquals("List<Integer> arr = java.util.Arrays.asList(1, 2, 3);", res);
+        assertEquals("List<Integer> arr = java.util.Arrays.asList((int)(1), (int)(2), (int)(3));", res);
 
         res = ((SimpleDBGrammarParser.QueryDefContext) syntaxTree).command(1)
                 .accept(new CommandParsingVisitor("A", "int"));

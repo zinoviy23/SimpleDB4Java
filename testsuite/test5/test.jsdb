@@ -1,0 +1,17 @@
+database MyDB;
+
+class User {
+    int age;
+    String name;
+    Pet[] pets;
+
+    String firstPetName(User user) {
+        Pet firstPet = user.getPets()[0];
+        return firstPet.name;
+    }
+
+}
+
+class Pet {
+    String name;
+}

@@ -1,0 +1,7 @@
+database MyDB;
+
+class NNumber {
+    String tmp;
+    NNumber[] getNumbers() -> NNumber.findAll(id >= 30 && id <= 105 && id == 103 || id >= 108);
+}
+

@@ -3,6 +3,7 @@ package zinoviy23.simpledb4java.parsing;
 import org.jetbrains.annotations.Nullable;
 import zinoviy23.simpledb4java.antlr.SimpleDBGrammarBaseVisitor;
 import zinoviy23.simpledb4java.antlr.SimpleDBGrammarParser;
+import zinoviy23.simpledb4java.codegeneration.Utils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,8 +30,9 @@ public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<Ty
             if (result == null)
                 return null;
             if (!result.type.equals("int") && !result.type.equals("float") && !result.type.equals("long")) {
-                throw new RuntimeException(String.format("operator %s is incompatible with type %s", ctx.unaryExpr().unaryOp().getText(),
-                        result.type));
+                throw new RuntimeException(String.format("operator %s is incompatible with type %s. In line %s",
+                        ctx.unaryExpr().unaryOp().getText(),
+                        result.type, ctx.getStart().getLine()));
             }
             return new TypeCheckingTreeResult(result.type,ctx.unaryExpr().unaryOp().getText() + result.value);
         }
@@ -46,7 +48,7 @@ public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<Ty
         }
 
         if (ctx.dottedId() != null) {
-            return ctx.dottedId().accept(new DottedIdVisitor(currentClass, true, DottedIdVisitor.StaticStatus.CAN_BE_STATIC));
+            return ctx.dottedId().accept(new DottedIdVisitor(currentClass, true, DottedIdVisitor.StaticStatus.STATIC));
         }
 
         if (ctx.arrayElementGetting() != null) {
@@ -73,18 +75,21 @@ public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<Ty
                 return new TypeCheckingTreeResult("String", String.format("%s + %s", result1.value, result2.value));
 
             if (!result1.type.equals("float") && !result1.type.equals("long") && !result1.type.equals("int")) {
-                throw new RuntimeException(String.format("Operator + allows only numeric types. Actual %s", result1.type));
+                throw new RuntimeException(String.format("Operator + allows only numeric types. Actual %s. In line %s",
+                        result1.type, ctx.getStart().getLine()));
             }
 
             if (!result2.type.equals("float") && !result2.type.equals("long") && !result2.type.equals("int")) {
-                throw new RuntimeException(String.format("Operator + allows only numeric types. Actual %s", result1.type));
+                throw new RuntimeException(String.format("Operator + allows only numeric types. Actual %s. In line %s",
+                        result1.type, ctx.getStart().getLine()));
             }
 
             TypeCheckingTreeResult.TypeCompareResult typeCompareResult =
                     TypeCheckingTreeResult.compareTypes(result1.type, result2.type);
 
             if (typeCompareResult == TypeCheckingTreeResult.TypeCompareResult.ERROR) {
-                throw new RuntimeException(String.format("Bad types for +. Actual %s %s", result1.type, result2.type));
+                throw new RuntimeException(String.format("Bad types for +. Actual %s %s. In line %s", result1.type,
+                        result2.type, ctx.getStart().getLine()));
             }
 
             String resType =
@@ -126,18 +131,21 @@ public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<Ty
         TypeCheckingTreeResult result2 = ctx.expression(1).accept(this);
 
         if (!result1.type.equals("float") && !result1.type.equals("long") && !result1.type.equals("int")) {
-            throw new RuntimeException(String.format("Operator %s allows only numeric types. Actual %s", operator, result1.type));
+            throw new RuntimeException(String.format("Operator %s allows only numeric types. Actual %s. In line %s",
+                    operator, result1.type, ctx.getStart().getLine()));
         }
 
         if (!result2.type.equals("float") && !result2.type.equals("long") && !result2.type.equals("int")) {
-            throw new RuntimeException(String.format("Operator %s allows only numeric types. Actual %s", operator, result1.type));
+            throw new RuntimeException(String.format("Operator %s allows only numeric types. Actual %s. In line %s",
+                    operator, result1.type, ctx.getStart().getLine()));
         }
 
         TypeCheckingTreeResult.TypeCompareResult typeCompareResult =
                 TypeCheckingTreeResult.compareTypes(result1.type, result2.type);
 
         if (typeCompareResult == TypeCheckingTreeResult.TypeCompareResult.ERROR) {
-            throw new RuntimeException(String.format("Bad types for %s. Actual %s %s", operator,result1.type, result2.type));
+            throw new RuntimeException(String.format("Bad types for %s. Actual %s %s. In line %s", operator,
+                    result1.type, result2.type, ctx.getStart().getLine()));
         }
 
         String resType =
@@ -173,9 +181,16 @@ public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<Ty
                 case EQ:
                     break;
                 case ERROR:
-                    throw new RuntimeException(String.format("Bad array elements of type %s and %s", type, result.type));
+                    throw new RuntimeException(String.format("Bad array elements of type %s and %s. In line %s",
+                            type, result.type, ctx.getStart().getLine()));
             }
-            listSb.append(result.value).append(", ");
+        }
+
+        for (TypeCheckingTreeResult result : elements) {
+            listSb.append("(").
+                    append(type.contains("[]") ? String.format("List<%s>",
+                            Utils.getWrappingTypeName(type.replace("[]", ""))) : type)
+                    .append(")").append("(").append(result.value).append(")").append(", ");
         }
 
         listSb.delete(listSb.length() - 2, listSb.length());
@@ -193,8 +208,18 @@ public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<Ty
     public TypeCheckingTreeResult visitConstant(SimpleDBGrammarParser.ConstantContext ctx) {
         if (ctx.BOOLEAN() != null)
             return new TypeCheckingTreeResult("boolean", ctx.getText());
-        else if (ctx.FLOAT() != null)
-            return new TypeCheckingTreeResult("float", ctx.getText());
+        else if (ctx.FLOAT() != null) {
+            try {
+                float a = Float.parseFloat(ctx.getText());
+                if (!Float.isFinite(a))
+                    throw new NumberFormatException();
+
+            } catch (NumberFormatException e) {
+                throw new RuntimeException(String.format("%s is bad literal for float. in line %s", ctx.getText(),
+                        ctx.getStart().getLine()));
+            }
+            return new TypeCheckingTreeResult("float", ctx.getText() + "f");
+        }
         else if (ctx.INT() != null) {
             try {
                 Integer.parseInt(ctx.getText());
@@ -202,13 +227,14 @@ public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<Ty
             } catch (NumberFormatException ex) {
                 try {
                     Long.parseLong(ctx.getText());
-                    return new TypeCheckingTreeResult("long", ctx.getText());
+                    return new TypeCheckingTreeResult("long", ctx.getText() + "L");
                 } catch (NumberFormatException ex1) {
-                    throw new RuntimeException(String.format("%s is bad number literal!", ctx.getText()));
+                    throw new RuntimeException(String.format("%s is bad number literal! In line %s",
+                            ctx.getText(), ctx.getStart().getLine()));
                 }
             }
         } else if (ctx.STRING() != null) {
-            return new TypeCheckingTreeResult("String", ctx.getText().substring(1, ctx.getText().length() - 1));
+            return new TypeCheckingTreeResult("String", ctx.getText());
         } else if (ctx.NULL() != null) {
             return new TypeCheckingTreeResult("null", "null");
         }
@@ -231,7 +257,7 @@ public class ExpressionTypeCheckingVisitor extends SimpleDBGrammarBaseVisitor<Ty
 
         if (ctx.dottedId() != null) {
             TypeCheckingTreeResult idResult = ctx.dottedId().accept(new DottedIdVisitor(currentClass, true,
-                    DottedIdVisitor.StaticStatus.CAN_BE_STATIC));
+                    DottedIdVisitor.StaticStatus.STATIC));
 
             if (!idResult.type.contains("[]"))
                 throw new RuntimeException(String.format("[] can be applied only to arrays. But actual type is %s. In expression %s"

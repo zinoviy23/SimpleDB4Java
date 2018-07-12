@@ -1,0 +1,10 @@
+database MyDB;
+
+class User {
+    int age;
+    String name;
+
+    float height;
+
+    User highestUser() -> User.max(height);
+}

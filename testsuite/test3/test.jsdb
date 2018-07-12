@@ -1,0 +1,13 @@
+database MyDB;
+
+class User {
+    int age;
+    String name;
+
+    float height;
+
+    // strange formula
+    //float ageHeightDiff(User user) -> user.age - user.height + 1111111111111111111111111111111111111111111111111111111111111111111111.0000000000000000000000000000000000000000000000001;
+
+    float ageHeightDiff(User user) -> user.age - user.height + 1.3;
+}

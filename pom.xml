@@ -72,7 +72,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>Main</mainClass>
+                            <mainClass>zinoviy23.simpledb4java.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -1,0 +1,18 @@
+database MyDB;
+
+class User {
+    String name;
+
+    Pet[] pets;
+}
+
+class Pet {
+    String name;
+
+    int age;
+
+    User user;
+
+    Pet getAdultPetOfUser(User usr) -> Pet.find(user == usr && age >= 4);
+}
+

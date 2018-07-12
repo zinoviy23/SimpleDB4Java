@@ -50,9 +50,6 @@ public class DottedIdVisitor extends SimpleDBGrammarBaseVisitor<TypeCheckingTree
         // this is class name or field or variable
         if (ctx.LPAR() == null) {
 
-            if (status == StaticStatus.STATIC)
-                throw new RuntimeException(String.format("Field can't be static. %s in class %s", name, currentClass));
-
             StaticStatus currentStatus = StaticStatus.CAN_BE_STATIC;
 
             boolean isField = true;
@@ -70,11 +67,15 @@ public class DottedIdVisitor extends SimpleDBGrammarBaseVisitor<TypeCheckingTree
                 if (SimpleDBGrammarParser.classesSymbolTable.contains(name)) {
                     type = name;
                     currentStatus = StaticStatus.STATIC;
+                    isField = false;
                 }
             }
             if (type == null) {
-                throw new RuntimeException(String.format("Unknown id %s", name));
+                throw new RuntimeException(String.format("Unknown id %s. In line %s", name, ctx.getStart().getLine()));
             }
+            if (status == StaticStatus.STATIC && isField)
+                throw new RuntimeException(String.format("Field can't be static. %s in class %s. In line %s", name,
+                        currentClass, ctx.getStart().getLine()));
 
             if (ctx.dottedId() != null) {
                 TypeCheckingTreeResult result = ctx.dottedId().accept(new DottedIdVisitor(type, false, currentStatus));
@@ -91,13 +92,13 @@ public class DottedIdVisitor extends SimpleDBGrammarBaseVisitor<TypeCheckingTree
                 methodInfo = SimpleDBGrammarParser.methodsSymbolTable.get(currentClass).get(name);
 
             if (methodInfo == null) {
-                throw new RuntimeException(String.format("Unknown method id %s", name));
+                throw new RuntimeException(String.format("Unknown method id %s. In line %s", name, ctx.getStart().getLine()));
             }
 
             if (status == StaticStatus.CANT_BE_STATIC && methodInfo.isStatic)
-                throw new RuntimeException(String.format("%s is static method", name));
+                throw new RuntimeException(String.format("%s is static method in line %s", name, ctx.getStart().getLine()));
             if (status == StaticStatus.STATIC && !methodInfo.isStatic)
-                throw new RuntimeException(String.format("%s is not static method", name));
+                throw new RuntimeException(String.format("%s is not static method in line %s", name, ctx.getStart().getLine()));
 
             if (methodInfo.arguments != null) {
                 List<TypeCheckingTreeResult> args = ctx.callArgList().accept(new CallListArgsVisitor(currentClass));
@@ -109,42 +110,60 @@ public class DottedIdVisitor extends SimpleDBGrammarBaseVisitor<TypeCheckingTree
                         TypeCheckingTreeResult.TypeCompareResult res = TypeCheckingTreeResult.compareTypes(argType, current.type);
                         if (res != TypeCheckingTreeResult.TypeCompareResult.EQ && res != TypeCheckingTreeResult.TypeCompareResult.GREAT)
                             throw new RuntimeException(
-                                    String.format("Wrong param type for %s in class %s in method %s. Expected %s, actual %s",
-                                            argName, currentClass, name, argType, current.type));
+                                    String.format("Wrong param type for %s in class %s in method %s. Expected %s, actual %s. In line %s",
+                                            argName, currentClass, name, argType, current.type, ctx.getStart().getLine()));
                     });
                 } else {
                     throw new RuntimeException(
-                            String.format("Wrong param arguments count for %s in class %s.",
-                                    name, currentClass));
+                            String.format("Wrong param arguments count for %s in class %s. In line %s",
+                                    name, currentClass, ctx.getStart().getLine()));
                 }
 
                 String argsStr = String.join(", ", args.stream().map(arg -> arg.value).collect(Collectors.toList()));
-
-                if (ctx.dottedId() != null) {
-                    TypeCheckingTreeResult result = ctx.dottedId().accept(new DottedIdVisitor(methodInfo.type, false,
-                            StaticStatus.CANT_BE_STATIC));
-                    return new TypeCheckingTreeResult(result.type, String.format("%s(%s).%s", name, argsStr, result.value));
+                if (!name.equals("getById")) {
+                    if (ctx.dottedId() != null) {
+                        TypeCheckingTreeResult result = ctx.dottedId().accept(new DottedIdVisitor(methodInfo.type, false,
+                                StaticStatus.CANT_BE_STATIC));
+                        return new TypeCheckingTreeResult(result.type, String.format("%s(%s).%s", name, argsStr, result.value));
+                    } else {
+                        return new TypeCheckingTreeResult(methodInfo.type, String.format("%s(%s)", name, argsStr));
+                    }
                 } else {
-                    return new TypeCheckingTreeResult(methodInfo.type, String.format("%s(%s)", name, argsStr));
+                    if (ctx.dottedId() != null) {
+                        TypeCheckingTreeResult result = ctx.dottedId().accept(new DottedIdVisitor(methodInfo.type, false,
+                                StaticStatus.CANT_BE_STATIC));
+                        return new TypeCheckingTreeResult(result.type, String.format("%s(%s).orElse(null).%s",
+                                name, argsStr, result.value));
+                    } else {
+                        return new TypeCheckingTreeResult(methodInfo.type, String.format("%s(%s).orElse(null)", name, argsStr));
+                    }
                 }
             } else {
                 if (ctx.ID().getText().equals("min") || ctx.ID().getText().equals("max")) {
                     if (ctx.dottedId() != null) {
                         TypeCheckingTreeResult result = ctx.dottedId().accept(new DottedIdVisitor(methodInfo.type, false,
                                 StaticStatus.CANT_BE_STATIC));
-                        return new TypeCheckingTreeResult(result.type, String.format("%s(%s).%s",
+                        return new TypeCheckingTreeResult(result.type, String.format("%s(%s).orElse(null).%s",
                                 name, ctx.callArgList().accept(new CallArgListForMinMaxVisitor(currentClass)), result.value));
                     } else {
-                        return new TypeCheckingTreeResult(methodInfo.type, String.format("%s(%s)", name,
+                        return new TypeCheckingTreeResult(methodInfo.type, String.format("%s(%s).orElse(null)", name,
                                 ctx.callArgList().accept(new CallArgListForMinMaxVisitor(currentClass))));
                     }
-                } else  { //TODO: for find
+                } else  {
                     if (ctx.dottedId() != null) {
                         TypeCheckingTreeResult result = ctx.dottedId().accept(new DottedIdVisitor(methodInfo.type, false,
                                 StaticStatus.CANT_BE_STATIC));
+                        if (name.equals("find")) {
+                            return new TypeCheckingTreeResult(result.type, String.format("%s(%s).orElse(null).%s",
+                                    name, ctx.callArgList().accept(new CallArgListForFindVisitor(currentClass)).value, result.value));
+                        }
                         return new TypeCheckingTreeResult(result.type, String.format("%s(%s).%s",
                                 name, ctx.callArgList().accept(new CallArgListForFindVisitor(currentClass)).value, result.value));
                     } else {
+                        if (name.equals("find")) {
+                            return new TypeCheckingTreeResult(methodInfo.type, String.format("%s(%s).orElse(null)", name,
+                                    ctx.callArgList().accept(new CallArgListForFindVisitor(currentClass)).value));
+                        }
                         return new TypeCheckingTreeResult(methodInfo.type, String.format("%s(%s)", name,
                                 ctx.callArgList().accept(new CallArgListForFindVisitor(currentClass)).value));
                     }
