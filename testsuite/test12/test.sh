@@ -13,5 +13,3 @@ echo "user's program compiled"
 java Main
 
 echo "user's program is running"
-
-read
