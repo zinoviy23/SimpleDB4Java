@@ -5,14 +5,19 @@ class User {
 
     Forum[] forums;
 
-    String getAllUserMessagesToString(User usr) {
+    String getAllUserMessagesToString(User usr, int after) {
          String res = "";
 
          for (Forum f : usr.forums)
             for (Message m : Message.findAll(user == usr && forum == f))
-                res = res +  m.message;
+                if (m.date > after)
+                    res = res +  m.message + ", ";
          return res;
     }
+
+    User getKek() -> User.find(nickName == "kek");
+
+    String firstUserByAlphabet() -> User.min(nickName).getNickName();
 }
 
 class Forum {
@@ -27,5 +32,7 @@ class Message {
     Forum forum;
 
     String message;
+
+    int date;
 }
 

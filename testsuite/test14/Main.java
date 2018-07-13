@@ -18,17 +18,21 @@ public class Main {
         user1.addForums(f2);
         user1.addForums(f3);
 
-        Message.create(user, f1, "aa");
-        Message.create(user1, f2, "bb");
-        Message.create(user, f3, "cc");
-        Message.create(user, f2, "dd");
-        Message.create(user1, f3, "ee");
-        Message.create(user, f1, "ff");
-        Message.create(user, f3, "gg");
-        Message.create(user1, f2, "hh");
+        Message.create(user, f1, "aa", 2);
+        Message.create(user1, f2, "bb", 10);
+        Message.create(user, f3, "cc", 6);
+        Message.create(user, f2, "dd", 3);
+        Message.create(user1, f3, "ee", 100);
+        Message.create(user, f1, "ff", 8);
+        Message.create(user, f3, "gg", 13);
+        Message.create(user1, f2, "hh", 1);
 
-        System.out.println(User.getAllUserMessagesToString(user));
-        System.out.println(User.getAllUserMessagesToString(user1));
+        System.out.println(User.getAllUserMessagesToString(user, 5));
+        System.out.println(User.getAllUserMessagesToString(user, 0));
+        System.out.println(User.getAllUserMessagesToString(user1, 6));
+        System.out.println(User.getAllUserMessagesToString(user1, 0));
+        System.out.println(User.firstUserByAlphabet());
+        System.out.println(User.getKek().getNickName());
 
         DBService.getInstance().close();
     }

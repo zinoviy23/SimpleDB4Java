@@ -100,7 +100,12 @@ public class CallArgListForFindVisitor extends SimpleDBGrammarBaseVisitor<TypeCh
         }
 
         if (ctx.constant() != null) {
-            return ctx.constant().accept(new ExpressionTypeCheckingVisitor(className));
+            TypeCheckingTreeResult result = ctx.constant().accept(new ExpressionTypeCheckingVisitor(className));
+            if (result.type.equals("String")) {
+                return new TypeCheckingTreeResult(result.type,"'" + result.value.substring(1,
+                        result.value.length() - 1) + "'");
+            }
+            return result;
         }
 
         if (ctx.dottedId() != null) {
